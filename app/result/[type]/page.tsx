@@ -89,8 +89,8 @@ export default function ResultPage() {
       <style jsx global>{`
         strong {
           font-weight: 700;
-          color: ${typeColor};
-          opacity: 1;
+          background: linear-gradient(transparent 60%, #ffd700 60%);
+          padding: 0 2px;
         }
       `}</style>
       <div className="min-h-screen" style={{
@@ -184,12 +184,12 @@ export default function ResultPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.7 }}
-            className="my-16"
+            style={{ margin: '15px 5px' }}
           >
             <h3 className="text-xl lg:text-2xl font-black mb-12 text-center" style={{ color: 'var(--text-primary)' }}>
               あなたのスコア
             </h3>
-            <div className="grid grid-cols-5 gap-5">
+            <div className="grid grid-cols-5 gap-5" style={{ margin: '5px 5px 15px 5px' }}>
               {[
                 { label: 'L', sublabel: '性欲', value: result.scores.L, max: 16 },
                 { label: 'E', sublabel: '新奇性', value: result.scores.E, max: 9 },

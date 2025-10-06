@@ -9,14 +9,9 @@ import { Header } from '@/components/Header';
 export default function Home() {
   const router = useRouter();
   const [selectedGender, setSelectedGender] = useState<Gender | null>(null);
-  const [showAgeModal, setShowAgeModal] = useState(false);
-  const [ageConfirmed, setAgeConfirmed] = useState(false);
+  const [showGenderModal, setShowGenderModal] = useState(false);
 
-  const handleAgeConfirm = () => {
-    if (!ageConfirmed) {
-      alert('18歳以上であることを確認してください');
-      return;
-    }
+  const handleStart = () => {
     if (!selectedGender) {
       alert('性別を選択してください');
       return;
@@ -57,7 +52,7 @@ export default function Home() {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={() => setShowAgeModal(true)}
+                onClick={() => setShowGenderModal(true)}
                 className="w-full py-4 rounded-full font-bold text-white text-lg shadow-lg"
                 style={{
                   background: 'linear-gradient(135deg, #ff6b9d 0%, #ff8fab 100%)',
@@ -121,7 +116,6 @@ export default function Home() {
             {/* 注意事項 */}
             <div className="text-center pt-2">
               <p className="text-xs leading-relaxed" style={{ color: 'var(--text-muted)' }}>
-                ※ 18歳以上の方のみご利用いただけます<br />
                 ※ 回答内容は匿名で処理されます
               </p>
             </div>
@@ -129,14 +123,14 @@ export default function Home() {
         </div>
       </div>
 
-      {/* 年齢確認・性別選択モーダル */}
-      {showAgeModal && (
+      {/* 性別選択モーダル */}
+      {showGenderModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-5">
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             className="absolute inset-0 bg-black/80 backdrop-blur-md"
-            onClick={() => setShowAgeModal(false)}
+            onClick={() => setShowGenderModal(false)}
           />
           <motion.div
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
@@ -147,86 +141,52 @@ export default function Home() {
           >
             <div className="w-16 h-16 mx-auto mb-5 rounded-full flex items-center justify-center text-3xl"
                  style={{ background: 'linear-gradient(135deg, #ff6b9d 0%, #ff8fab 100%)' }}>
-              🔞
+              💕
             </div>
             <h3 className="text-2xl font-black mb-3 text-center" style={{ color: 'var(--text-primary)' }}>
-              年齢確認
+              性別を選択
             </h3>
             <p className="text-center mb-6 text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-              このサービスは18歳以上の方のみご利用いただけます。
+              あなたの性別を選択してください
             </p>
 
-            <label className="flex items-center justify-center gap-3 mb-8 cursor-pointer">
-              <div className="relative">
-                <input
-                  type="checkbox"
-                  checked={ageConfirmed}
-                  onChange={(e) => setAgeConfirmed(e.target.checked)}
-                  className="w-6 h-6 cursor-pointer appearance-none border-2 rounded-lg transition-all"
-                  style={{
-                    borderColor: ageConfirmed ? 'var(--primary)' : '#ddd',
-                    backgroundColor: ageConfirmed ? 'var(--primary)' : 'white',
-                  }}
-                />
-                {ageConfirmed && (
-                  <svg className="absolute top-0.5 left-0.5 w-5 h-5 pointer-events-none" viewBox="0 0 14 14" fill="none">
-                    <path d="M11.6666 3.5L5.24998 9.91667L2.33331 7" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                )}
-              </div>
-              <span className="text-base font-bold" style={{ color: 'var(--text-primary)' }}>
-                私は18歳以上です
-              </span>
-            </label>
-
-            {ageConfirmed && (
-              <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: 'auto' }}
-                transition={{ duration: 0.3 }}
+            <div className="grid grid-cols-2 gap-4 mb-6">
+              <button
+                onClick={() => setSelectedGender('male')}
+                className="relative rounded-[20px] py-8 px-4 transition-all"
+                style={{
+                  background: selectedGender === 'male' ? 'linear-gradient(135deg, #ff6b9d 0%, #ff8fab 100%)' : '#f8f9fa',
+                  boxShadow: selectedGender === 'male' ? '0 8px 20px rgba(255,107,157,0.3)' : '0 2px 8px rgba(0,0,0,0.04)',
+                }}
               >
-                <p className="text-center mb-4 text-sm font-bold" style={{ color: 'var(--text-primary)' }}>
-                  性別を選択してください
-                </p>
-                <div className="grid grid-cols-2 gap-4 mb-6">
-                  <button
-                    onClick={() => setSelectedGender('male')}
-                    className="relative rounded-[20px] py-8 px-4 transition-all"
-                    style={{
-                      background: selectedGender === 'male' ? 'linear-gradient(135deg, #ff6b9d 0%, #ff8fab 100%)' : '#f8f9fa',
-                      boxShadow: selectedGender === 'male' ? '0 8px 20px rgba(255,107,157,0.3)' : '0 2px 8px rgba(0,0,0,0.04)',
-                    }}
-                  >
-                    <div className="text-5xl mb-3">👨</div>
-                    <div className="text-lg font-bold" style={{ color: selectedGender === 'male' ? 'white' : 'var(--text-primary)' }}>
-                      男性
-                    </div>
-                  </button>
-
-                  <button
-                    onClick={() => setSelectedGender('female')}
-                    className="relative rounded-[20px] py-8 px-4 transition-all"
-                    style={{
-                      background: selectedGender === 'female' ? 'linear-gradient(135deg, #ff6b9d 0%, #ff8fab 100%)' : '#f8f9fa',
-                      boxShadow: selectedGender === 'female' ? '0 8px 20px rgba(255,107,157,0.3)' : '0 2px 8px rgba(0,0,0,0.04)',
-                    }}
-                  >
-                    <div className="text-5xl mb-3">👩</div>
-                    <div className="text-lg font-bold" style={{ color: selectedGender === 'female' ? 'white' : 'var(--text-primary)' }}>
-                      女性
-                    </div>
-                  </button>
+                <div className="text-5xl mb-3">👨</div>
+                <div className="text-lg font-bold" style={{ color: selectedGender === 'male' ? 'white' : 'var(--text-primary)' }}>
+                  男性
                 </div>
-              </motion.div>
-            )}
+              </button>
+
+              <button
+                onClick={() => setSelectedGender('female')}
+                className="relative rounded-[20px] py-8 px-4 transition-all"
+                style={{
+                  background: selectedGender === 'female' ? 'linear-gradient(135deg, #ff6b9d 0%, #ff8fab 100%)' : '#f8f9fa',
+                  boxShadow: selectedGender === 'female' ? '0 8px 20px rgba(255,107,157,0.3)' : '0 2px 8px rgba(0,0,0,0.04)',
+                }}
+              >
+                <div className="text-5xl mb-3">👩</div>
+                <div className="text-lg font-bold" style={{ color: selectedGender === 'female' ? 'white' : 'var(--text-primary)' }}>
+                  女性
+                </div>
+              </button>
+            </div>
 
             <button
-              onClick={handleAgeConfirm}
-              disabled={!ageConfirmed || !selectedGender}
+              onClick={handleStart}
+              disabled={!selectedGender}
               className="w-full py-4 rounded-full text-lg font-bold text-white transition-all disabled:opacity-30 disabled:cursor-not-allowed"
               style={{
-                background: (ageConfirmed && selectedGender) ? 'linear-gradient(135deg, #ff6b9d 0%, #ff8fab 100%)' : '#ddd',
-                boxShadow: (ageConfirmed && selectedGender) ? '0 8px 24px rgba(255,107,157,0.4)' : 'none',
+                background: selectedGender ? 'linear-gradient(135deg, #ff6b9d 0%, #ff8fab 100%)' : '#ddd',
+                boxShadow: selectedGender ? '0 8px 24px rgba(255,107,157,0.4)' : 'none',
               }}
             >
               診断をはじめる

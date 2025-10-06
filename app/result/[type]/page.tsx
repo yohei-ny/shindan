@@ -251,7 +251,8 @@ export default function ResultPage() {
             <div className="bg-white rounded-2xl p-8 lg:p-10 relative overflow-hidden"
                  style={{
                    boxShadow: '0 4px 20px rgba(0,0,0,0.06)',
-                   border: `2px solid ${typeColor}20`
+                   border: `2px solid ${typeColor}20`,
+                   margin: '20px 10px'
                  }}>
               <div className="mb-6">
                 <div className="flex items-center gap-3 mb-6 pb-4" style={{ borderBottom: `2px solid ${typeColor}20` }}>
@@ -280,7 +281,8 @@ export default function ResultPage() {
             <div className="bg-white rounded-2xl p-8 lg:p-10 relative overflow-hidden"
                  style={{
                    boxShadow: '0 4px 20px rgba(0,0,0,0.06)',
-                   border: `2px solid ${typeColor}20`
+                   border: `2px solid ${typeColor}20`,
+                   margin: '20px 10px'
                  }}>
               <div className="mb-6">
                 <div className="flex items-center gap-3 mb-6 pb-4" style={{ borderBottom: `2px solid ${typeColor}20` }}>

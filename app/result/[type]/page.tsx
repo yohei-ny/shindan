@@ -16,6 +16,33 @@ function getTypeColor(type: DiagnosisType): string {
   return colors[type] || '#4298b4';
 }
 
+// 重要なキーワードを強調する関数
+function highlightText(text: string, color: string) {
+  // 句点で分割して、各文の重要部分を太字にする
+  const sentences = text.split('。').filter(s => s.trim());
+
+  return sentences.map((sentence, index) => {
+    // 重要なキーワードパターン
+    const keywords = [
+      /(\S+型)/g,
+      /(主導|受け|協働|バランス|柔軟|安心|信頼|満足|冒険|探索|王道|新奇|頻度|強度|段取り|配慮|温もり|刺激)/g,
+      /(得意|苦手|強み|弱点|価値|武器|魅力)/g,
+    ];
+
+    let highlightedSentence = sentence;
+    keywords.forEach(pattern => {
+      highlightedSentence = highlightedSentence.replace(pattern, '<strong>$1</strong>');
+    });
+
+    return (
+      <span key={index}>
+        <span dangerouslySetInnerHTML={{ __html: highlightedSentence }} />
+        {index < sentences.length - 1 && '。'}
+      </span>
+    );
+  });
+}
+
 export default function ResultPage() {
   const params = useParams();
   const router = useRouter();
@@ -59,6 +86,13 @@ export default function ResultPage() {
   return (
     <>
       <Header />
+      <style jsx global>{`
+        strong {
+          font-weight: 700;
+          color: ${typeColor};
+          opacity: 1;
+        }
+      `}</style>
       <div className="min-h-screen" style={{
         background: 'linear-gradient(135deg, #fff5f8 0%, #ffe9f0 50%, #ffd6e7 100%)',
         paddingTop: '80px',
@@ -150,9 +184,9 @@ export default function ResultPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.7 }}
-            className="mb-12"
+            className="my-16"
           >
-            <h3 className="text-xl lg:text-2xl font-black mb-10 text-center" style={{ color: 'var(--text-primary)' }}>
+            <h3 className="text-xl lg:text-2xl font-black mb-12 text-center" style={{ color: 'var(--text-primary)' }}>
               あなたのスコア
             </h3>
             <div className="grid grid-cols-5 gap-5">
@@ -228,14 +262,14 @@ export default function ResultPage() {
                     顕在的な特徴
                   </h2>
                 </div>
-                <div className="px-2 lg:px-4">
+                <div className="px-4 lg:px-6 py-2">
                   <p className="text-base lg:text-lg leading-loose" style={{
                     color: 'var(--text-primary)',
                     opacity: 0.9,
                     lineHeight: '2.2',
                     letterSpacing: '0.03em'
                   }}>
-                    {typeInfo.description.manifest}
+                    {highlightText(typeInfo.description.manifest, typeColor)}
                   </p>
                 </div>
               </div>
@@ -257,14 +291,14 @@ export default function ResultPage() {
                     潜在的な特徴
                   </h2>
                 </div>
-                <div className="px-2 lg:px-4">
+                <div className="px-4 lg:px-6 py-2">
                   <p className="text-base lg:text-lg leading-loose" style={{
                     color: 'var(--text-primary)',
                     opacity: 0.9,
                     lineHeight: '2.2',
                     letterSpacing: '0.03em'
                   }}>
-                    {typeInfo.description.latent}
+                    {highlightText(typeInfo.description.latent, typeColor)}
                   </p>
                 </div>
               </div>

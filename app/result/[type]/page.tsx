@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import { DiagnosisResult, DiagnosisType } from '@/types';
 import { getTypeDescription } from '@/lib/types';
 import { Header } from '@/components/Header';
+import { Footer } from '@/components/Footer';
 
 function getTypeColor(type: DiagnosisType): string {
   const colors: Record<string, string> = {
@@ -393,6 +394,7 @@ export default function ResultPage() {
         </div>
       </div>
       </div>
+      <Footer />
     </>
   );
 }

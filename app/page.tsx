@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { Gender } from '@/types';
 import { Header } from '@/components/Header';
+import { Footer } from '@/components/Footer';
 
 export default function Home() {
   const router = useRouter();
@@ -194,6 +195,7 @@ export default function Home() {
           </motion.div>
         </div>
       )}
+      <Footer />
     </>
   );
 }

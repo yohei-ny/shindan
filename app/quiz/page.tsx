@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { questions } from '@/lib/questions';
 import { calculateScores, determineType, determineBadges } from '@/lib/diagnosis';
 import { Header } from '@/components/Header';
+import { Footer } from '@/components/Footer';
 
 export default function QuizPage() {
   const router = useRouter();
@@ -255,6 +256,7 @@ export default function QuizPage() {
         {/* スペーサー（フッター用） */}
         <div style={{ height: '40px' }}></div>
       </div>
+      <Footer />
     </>
   );
 }

@@ -210,49 +210,63 @@ export default function ResultPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.2 }}
-            className="space-y-10 mb-16"
+            className="space-y-8 mb-16"
           >
             {/* 顕在的な特徴 */}
-            <div className="bg-white rounded-2xl p-10 lg:p-12 relative overflow-hidden group"
-                 style={{ boxShadow: '0 4px 20px rgba(0,0,0,0.06)' }}>
-              <div className="absolute top-0 left-0 w-1.5 h-full rounded-l-2xl"
-                   style={{ background: `linear-gradient(180deg, ${typeColor} 0%, ${typeColor}aa 100%)` }}
-              />
-              <div className="pl-6">
-                <div className="flex items-center gap-4 mb-8">
-                  <div className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl"
-                       style={{ background: `${typeColor}15` }}>
+            <div className="bg-white rounded-2xl p-8 lg:p-10 relative overflow-hidden"
+                 style={{
+                   boxShadow: '0 4px 20px rgba(0,0,0,0.06)',
+                   border: `2px solid ${typeColor}20`
+                 }}>
+              <div className="mb-6">
+                <div className="flex items-center gap-3 mb-6 pb-4" style={{ borderBottom: `2px solid ${typeColor}20` }}>
+                  <div className="w-10 h-10 rounded-xl flex items-center justify-center text-xl"
+                       style={{ background: `${typeColor}20` }}>
                     👁️
                   </div>
-                  <h2 className="text-2xl lg:text-3xl font-black" style={{ color: 'var(--text-primary)' }}>
+                  <h2 className="text-xl lg:text-2xl font-black" style={{ color: typeColor }}>
                     顕在的な特徴
                   </h2>
                 </div>
-                <p className="text-base lg:text-lg leading-loose" style={{ color: 'var(--text-primary)', opacity: 0.9, lineHeight: '2' }}>
-                  {typeInfo.description.manifest}
-                </p>
+                <div className="px-2 lg:px-4">
+                  <p className="text-base lg:text-lg leading-loose" style={{
+                    color: 'var(--text-primary)',
+                    opacity: 0.9,
+                    lineHeight: '2.2',
+                    letterSpacing: '0.03em'
+                  }}>
+                    {typeInfo.description.manifest}
+                  </p>
+                </div>
               </div>
             </div>
 
             {/* 潜在的な特徴 */}
-            <div className="bg-white rounded-2xl p-10 lg:p-12 relative overflow-hidden group"
-                 style={{ boxShadow: '0 4px 20px rgba(0,0,0,0.06)' }}>
-              <div className="absolute top-0 left-0 w-1.5 h-full rounded-l-2xl"
-                   style={{ background: `linear-gradient(180deg, ${typeColor} 0%, ${typeColor}aa 100%)` }}
-              />
-              <div className="pl-6">
-                <div className="flex items-center gap-4 mb-8">
-                  <div className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl"
-                       style={{ background: `${typeColor}15` }}>
+            <div className="bg-white rounded-2xl p-8 lg:p-10 relative overflow-hidden"
+                 style={{
+                   boxShadow: '0 4px 20px rgba(0,0,0,0.06)',
+                   border: `2px solid ${typeColor}20`
+                 }}>
+              <div className="mb-6">
+                <div className="flex items-center gap-3 mb-6 pb-4" style={{ borderBottom: `2px solid ${typeColor}20` }}>
+                  <div className="w-10 h-10 rounded-xl flex items-center justify-center text-xl"
+                       style={{ background: `${typeColor}20` }}>
                     🔮
                   </div>
-                  <h2 className="text-2xl lg:text-3xl font-black" style={{ color: 'var(--text-primary)' }}>
+                  <h2 className="text-xl lg:text-2xl font-black" style={{ color: typeColor }}>
                     潜在的な特徴
                   </h2>
                 </div>
-                <p className="text-base lg:text-lg leading-loose" style={{ color: 'var(--text-primary)', opacity: 0.9, lineHeight: '2' }}>
-                  {typeInfo.description.latent}
-                </p>
+                <div className="px-2 lg:px-4">
+                  <p className="text-base lg:text-lg leading-loose" style={{
+                    color: 'var(--text-primary)',
+                    opacity: 0.9,
+                    lineHeight: '2.2',
+                    letterSpacing: '0.03em'
+                  }}>
+                    {typeInfo.description.latent}
+                  </p>
+                </div>
               </div>
             </div>
           </motion.div>

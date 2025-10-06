@@ -6,7 +6,7 @@ export function Footer() {
   return (
     <footer className="bg-white border-t border-gray-100 mt-20" style={{ margin: '0 auto', textAlign: "center" as const }}>
       <div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-8">
+        <div>
           {/* サービス情報 */}
           <div>
             <div className="font-bold text-lg mb-4" style={{ color: 'var(--text-primary)' }}>

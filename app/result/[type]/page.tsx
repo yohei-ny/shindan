@@ -64,12 +64,12 @@ export default function ResultPage() {
         paddingTop: '80px',
       }}>
         {/* シェアボタン */}
-        <div className="bg-white/98 backdrop-blur-xl shadow-sm py-8">
-          <div className="max-w-4xl mx-auto px-8">
-          <div className="flex justify-center gap-4 lg:gap-5">
+        <div className="bg-white/98 backdrop-blur-xl shadow-sm py-6">
+          <div className="max-w-3xl mx-auto px-6">
+          <div className="flex justify-center gap-3 lg:gap-4">
             <button
               onClick={() => handleShare('twitter')}
-              className="px-6 lg:px-8 py-4 lg:py-4 bg-white rounded-xl lg:rounded-2xl font-bold text-sm lg:text-base shadow-sm hover:shadow-lg transition-all flex items-center gap-2"
+              className="px-5 lg:px-6 py-3 lg:py-3.5 bg-white rounded-lg font-bold text-sm lg:text-base shadow-sm hover:shadow-lg transition-all flex items-center gap-2"
               style={{ color: typeColor, border: `2px solid ${typeColor}` }}
             >
               <span className="text-lg">🐦</span>
@@ -78,7 +78,7 @@ export default function ResultPage() {
             </button>
             <button
               onClick={() => handleShare('line')}
-              className="px-6 lg:px-8 py-4 lg:py-4 bg-white rounded-xl lg:rounded-2xl font-bold text-sm lg:text-base shadow-sm hover:shadow-lg transition-all flex items-center gap-2"
+              className="px-5 lg:px-6 py-3 lg:py-3.5 bg-white rounded-lg font-bold text-sm lg:text-base shadow-sm hover:shadow-lg transition-all flex items-center gap-2"
               style={{ color: typeColor, border: `2px solid ${typeColor}` }}
             >
               <span className="text-lg">📱</span>
@@ -87,7 +87,7 @@ export default function ResultPage() {
             </button>
             <button
               onClick={handleCopyLink}
-              className="px-6 lg:px-8 py-4 lg:py-4 bg-white rounded-xl lg:rounded-2xl font-bold text-sm lg:text-base shadow-sm hover:shadow-lg transition-all flex items-center gap-2"
+              className="px-5 lg:px-6 py-3 lg:py-3.5 bg-white rounded-lg font-bold text-sm lg:text-base shadow-sm hover:shadow-lg transition-all flex items-center gap-2"
               style={{ color: typeColor, border: `2px solid ${typeColor}` }}
             >
               <span className="text-lg">{copied ? '✓' : '🔗'}</span>
@@ -97,17 +97,17 @@ export default function ResultPage() {
         </div>
       </div>
 
-      <div className="px-8 py-20 flex justify-center">
-        <div className="w-full max-w-4xl">
+      <div className="px-6 py-12 flex justify-center">
+        <div className="w-full max-w-3xl">
           {/* タイプヒーロー */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
-            className="rounded-[36px] lg:rounded-[44px] p-16 lg:p-24 mb-20 text-white text-center relative overflow-hidden"
+            className="rounded-2xl p-10 lg:p-12 mb-10 text-white text-center relative overflow-hidden"
             style={{
               background: `linear-gradient(135deg, ${typeColor} 0%, ${typeColor}dd 100%)`,
-              boxShadow: '0 24px 60px rgba(0,0,0,0.15)'
+              boxShadow: '0 10px 30px rgba(0,0,0,0.2)'
             }}
           >
             <div className="relative z-10">
@@ -115,17 +115,17 @@ export default function ResultPage() {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.1, duration: 0.5 }}
-                className="inline-flex items-center gap-3 px-8 py-4 bg-white/20 backdrop-blur-md rounded-full mb-10"
+                className="inline-flex items-center gap-2 px-6 py-2 bg-white/20 backdrop-blur-md rounded-full mb-6"
               >
-                <span className="text-3xl">🎉</span>
-                <span className="text-base lg:text-lg font-bold tracking-wide">診断結果</span>
+                <span className="text-xl">🎉</span>
+                <span className="text-sm font-bold tracking-wide">診断結果</span>
               </motion.div>
 
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
-                className="text-8xl lg:text-9xl font-black mb-10 tracking-tight"
+                className="text-6xl lg:text-7xl font-black mb-6 tracking-tight"
                 style={{ textShadow: '0 4px 20px rgba(0,0,0,0.1)' }}
               >
                 {type}
@@ -135,7 +135,7 @@ export default function ResultPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
-                className="text-4xl lg:text-5xl font-black mb-6"
+                className="text-2xl lg:text-3xl font-black mb-4"
               >
                 {typeInfo.name}
               </motion.div>
@@ -144,7 +144,7 @@ export default function ResultPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
-                className="text-xl lg:text-2xl opacity-95 max-w-2xl mx-auto leading-relaxed"
+                className="text-base lg:text-lg opacity-95 max-w-2xl mx-auto leading-relaxed"
               >
                 {typeInfo.tagline}
               </motion.div>
@@ -155,7 +155,7 @@ export default function ResultPage() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.5 }}
-                  className="flex flex-wrap gap-4 justify-center mt-12"
+                  className="flex flex-wrap gap-3 justify-center mt-8"
                 >
                   {result.badges.map((badge, index) => (
                     <motion.div
@@ -163,7 +163,7 @@ export default function ResultPage() {
                       initial={{ scale: 0, rotate: -180 }}
                       animate={{ scale: 1, rotate: 0 }}
                       transition={{ delay: 0.6 + index * 0.1, type: 'spring', bounce: 0.4 }}
-                      className="bg-white/30 backdrop-blur-lg px-6 py-3 rounded-full text-base lg:text-lg font-bold border border-white/20"
+                      className="bg-white/30 backdrop-blur-lg px-5 py-2 rounded-full text-sm lg:text-base font-bold border border-white/20"
                     >
                       {badge.icon} {badge.text}
                     </motion.div>
@@ -184,12 +184,12 @@ export default function ResultPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.7 }}
-            className="mb-20"
+            className="mb-12"
           >
-            <h3 className="text-2xl lg:text-3xl font-black mb-12 text-center" style={{ color: 'var(--text-primary)' }}>
+            <h3 className="text-xl lg:text-2xl font-black mb-8 text-center" style={{ color: 'var(--text-primary)' }}>
               あなたのスコア
             </h3>
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-7">
+            <div className="grid grid-cols-5 gap-4">
               {[
                 { label: 'L', sublabel: '性欲', value: result.scores.L, max: 16 },
                 { label: 'E', sublabel: '新奇性', value: result.scores.E, max: 9 },
@@ -202,30 +202,30 @@ export default function ResultPage() {
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 0.8 + index * 0.08, type: 'spring', bounce: 0.4 }}
-                  className="bg-white rounded-[28px] p-8 text-center relative overflow-hidden"
+                  className="bg-white rounded-xl p-6 text-center relative overflow-hidden"
                   style={{ boxShadow: '0 4px 16px rgba(0,0,0,0.06)' }}
                 >
-                  <div className="absolute top-0 left-0 right-0 h-1.5 rounded-t-[28px]"
+                  <div className="absolute top-0 left-0 right-0 h-1 rounded-t-xl"
                        style={{
                          background: `linear-gradient(90deg, ${typeColor} 0%, ${typeColor}99 100%)`,
                          width: `${(score.value / score.max) * 100}%`,
                        }}
                   />
-                  <div className="text-sm font-bold mb-2" style={{ color: 'var(--text-secondary)' }}>
+                  <div className="text-xs font-bold mb-1" style={{ color: 'var(--text-secondary)' }}>
                     {score.label}
                   </div>
-                  <div className="text-xs mb-3" style={{ color: 'var(--text-muted)' }}>
+                  <div className="text-xs mb-2" style={{ color: 'var(--text-muted)' }}>
                     {score.sublabel}
                   </div>
                   <div className="flex items-baseline justify-center gap-1 mb-1">
-                    <div className="text-4xl lg:text-5xl font-black" style={{ color: typeColor }}>
+                    <div className="text-3xl lg:text-4xl font-black" style={{ color: typeColor }}>
                       {score.value}
                     </div>
-                    <div className="text-lg font-bold" style={{ color: 'var(--text-muted)' }}>
+                    <div className="text-sm font-bold" style={{ color: 'var(--text-muted)' }}>
                       / {score.max}
                     </div>
                   </div>
-                  <div className="w-full h-2 bg-gray-100 rounded-full mt-3 overflow-hidden">
+                  <div className="w-full h-2 bg-gray-100 rounded-full mt-2 overflow-hidden">
                     <motion.div
                       initial={{ width: 0 }}
                       animate={{ width: `${(score.value / score.max) * 100}%` }}
@@ -244,47 +244,47 @@ export default function ResultPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.2 }}
-            className="space-y-12 mb-20"
+            className="space-y-8 mb-16"
           >
             {/* 顕在的な特徴 */}
-            <div className="bg-white rounded-[32px] lg:rounded-[36px] p-12 lg:p-16 relative overflow-hidden group"
+            <div className="bg-white rounded-2xl p-8 lg:p-10 relative overflow-hidden group"
                  style={{ boxShadow: '0 4px 20px rgba(0,0,0,0.06)' }}>
-              <div className="absolute top-0 left-0 w-2 h-full rounded-l-[32px] lg:rounded-l-[36px]"
+              <div className="absolute top-0 left-0 w-1.5 h-full rounded-l-2xl"
                    style={{ background: `linear-gradient(180deg, ${typeColor} 0%, ${typeColor}aa 100%)` }}
               />
-              <div className="pl-8">
-                <div className="flex items-center gap-5 mb-10">
-                  <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-3xl"
+              <div className="pl-6">
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl"
                        style={{ background: `${typeColor}15` }}>
                     👁️
                   </div>
-                  <h2 className="text-3xl lg:text-4xl font-black" style={{ color: 'var(--text-primary)' }}>
+                  <h2 className="text-2xl lg:text-3xl font-black" style={{ color: 'var(--text-primary)' }}>
                     顕在的な特徴
                   </h2>
                 </div>
-                <p className="text-lg lg:text-xl leading-loose" style={{ color: 'var(--text-primary)', opacity: 0.85 }}>
+                <p className="text-base lg:text-lg leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.85 }}>
                   {typeInfo.description.manifest}
                 </p>
               </div>
             </div>
 
             {/* 潜在的な特徴 */}
-            <div className="bg-white rounded-[32px] lg:rounded-[36px] p-12 lg:p-16 relative overflow-hidden group"
+            <div className="bg-white rounded-2xl p-8 lg:p-10 relative overflow-hidden group"
                  style={{ boxShadow: '0 4px 20px rgba(0,0,0,0.06)' }}>
-              <div className="absolute top-0 left-0 w-2 h-full rounded-l-[32px] lg:rounded-l-[36px]"
+              <div className="absolute top-0 left-0 w-1.5 h-full rounded-l-2xl"
                    style={{ background: `linear-gradient(180deg, ${typeColor} 0%, ${typeColor}aa 100%)` }}
               />
-              <div className="pl-8">
-                <div className="flex items-center gap-5 mb-10">
-                  <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-3xl"
+              <div className="pl-6">
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl"
                        style={{ background: `${typeColor}15` }}>
                     🔮
                   </div>
-                  <h2 className="text-3xl lg:text-4xl font-black" style={{ color: 'var(--text-primary)' }}>
+                  <h2 className="text-2xl lg:text-3xl font-black" style={{ color: 'var(--text-primary)' }}>
                     潜在的な特徴
                   </h2>
                 </div>
-                <p className="text-lg lg:text-xl leading-loose" style={{ color: 'var(--text-primary)', opacity: 0.85 }}>
+                <p className="text-base lg:text-lg leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.85 }}>
                   {typeInfo.description.latent}
                 </p>
               </div>
@@ -296,14 +296,14 @@ export default function ResultPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.4 }}
-            className="space-y-5 pb-16"
+            className="space-y-4 pb-12"
           >
             <button
               onClick={() => {
                 localStorage.clear();
                 router.push('/');
               }}
-              className="w-full py-6 lg:py-7 rounded-2xl lg:rounded-[28px] text-xl lg:text-2xl font-bold text-white transition-all hover:scale-[1.02] active:scale-[0.98]"
+              className="w-full py-5 lg:py-6 rounded-xl text-lg lg:text-xl font-bold text-white transition-all hover:scale-[1.02] active:scale-[0.98]"
               style={{
                 background: `linear-gradient(135deg, ${typeColor} 0%, ${typeColor}dd 100%)`,
                 boxShadow: '0 8px 24px rgba(0,0,0,0.15)',
@@ -313,7 +313,7 @@ export default function ResultPage() {
             </button>
             <button
               onClick={() => router.push('/')}
-              className="w-full py-6 lg:py-7 rounded-2xl lg:rounded-[28px] text-xl lg:text-2xl font-bold bg-white transition-all hover:scale-[1.02] active:scale-[0.98]"
+              className="w-full py-5 lg:py-6 rounded-xl text-lg lg:text-xl font-bold bg-white transition-all hover:scale-[1.02] active:scale-[0.98]"
               style={{
                 border: `2px solid ${typeColor}`,
                 color: typeColor,

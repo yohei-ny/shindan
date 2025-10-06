@@ -63,40 +63,6 @@ export default function ResultPage() {
         background: 'linear-gradient(135deg, #fff5f8 0%, #ffe9f0 50%, #ffd6e7 100%)',
         paddingTop: '80px',
       }}>
-        {/* シェアボタン */}
-        <div className="bg-white/98 backdrop-blur-xl shadow-sm py-6">
-          <div className="max-w-3xl mx-auto px-6">
-          <div className="flex justify-center gap-3 lg:gap-4">
-            <button
-              onClick={() => handleShare('twitter')}
-              className="px-5 lg:px-6 py-3 lg:py-3.5 bg-white rounded-lg font-bold text-sm lg:text-base shadow-sm hover:shadow-lg transition-all flex items-center gap-2"
-              style={{ color: typeColor, border: `2px solid ${typeColor}` }}
-            >
-              <span className="text-lg">🐦</span>
-              <span className="hidden sm:inline">Xでシェア</span>
-              <span className="sm:hidden">X</span>
-            </button>
-            <button
-              onClick={() => handleShare('line')}
-              className="px-5 lg:px-6 py-3 lg:py-3.5 bg-white rounded-lg font-bold text-sm lg:text-base shadow-sm hover:shadow-lg transition-all flex items-center gap-2"
-              style={{ color: typeColor, border: `2px solid ${typeColor}` }}
-            >
-              <span className="text-lg">📱</span>
-              <span className="hidden sm:inline">LINEでシェア</span>
-              <span className="sm:hidden">LINE</span>
-            </button>
-            <button
-              onClick={handleCopyLink}
-              className="px-5 lg:px-6 py-3 lg:py-3.5 bg-white rounded-lg font-bold text-sm lg:text-base shadow-sm hover:shadow-lg transition-all flex items-center gap-2"
-              style={{ color: typeColor, border: `2px solid ${typeColor}` }}
-            >
-              <span className="text-lg">{copied ? '✓' : '🔗'}</span>
-              <span>{copied ? 'コピー済み' : 'リンク'}</span>
-            </button>
-          </div>
-        </div>
-      </div>
-
       <div className="px-6 py-12 flex justify-center">
         <div className="w-full max-w-3xl">
           {/* タイプヒーロー */}
@@ -186,10 +152,10 @@ export default function ResultPage() {
             transition={{ delay: 0.7 }}
             className="mb-12"
           >
-            <h3 className="text-xl lg:text-2xl font-black mb-8 text-center" style={{ color: 'var(--text-primary)' }}>
+            <h3 className="text-xl lg:text-2xl font-black mb-10 text-center" style={{ color: 'var(--text-primary)' }}>
               あなたのスコア
             </h3>
-            <div className="grid grid-cols-5 gap-4">
+            <div className="grid grid-cols-5 gap-5">
               {[
                 { label: 'L', sublabel: '性欲', value: result.scores.L, max: 16 },
                 { label: 'E', sublabel: '新奇性', value: result.scores.E, max: 9 },
@@ -202,7 +168,7 @@ export default function ResultPage() {
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 0.8 + index * 0.08, type: 'spring', bounce: 0.4 }}
-                  className="bg-white rounded-xl p-6 text-center relative overflow-hidden"
+                  className="bg-white rounded-xl p-7 text-center relative overflow-hidden"
                   style={{ boxShadow: '0 4px 16px rgba(0,0,0,0.06)' }}
                 >
                   <div className="absolute top-0 left-0 right-0 h-1 rounded-t-xl"
@@ -244,16 +210,16 @@ export default function ResultPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.2 }}
-            className="space-y-8 mb-16"
+            className="space-y-10 mb-16"
           >
             {/* 顕在的な特徴 */}
-            <div className="bg-white rounded-2xl p-8 lg:p-10 relative overflow-hidden group"
+            <div className="bg-white rounded-2xl p-10 lg:p-12 relative overflow-hidden group"
                  style={{ boxShadow: '0 4px 20px rgba(0,0,0,0.06)' }}>
               <div className="absolute top-0 left-0 w-1.5 h-full rounded-l-2xl"
                    style={{ background: `linear-gradient(180deg, ${typeColor} 0%, ${typeColor}aa 100%)` }}
               />
               <div className="pl-6">
-                <div className="flex items-center gap-4 mb-6">
+                <div className="flex items-center gap-4 mb-8">
                   <div className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl"
                        style={{ background: `${typeColor}15` }}>
                     👁️
@@ -262,20 +228,20 @@ export default function ResultPage() {
                     顕在的な特徴
                   </h2>
                 </div>
-                <p className="text-base lg:text-lg leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.85 }}>
+                <p className="text-base lg:text-lg leading-loose" style={{ color: 'var(--text-primary)', opacity: 0.9, lineHeight: '2' }}>
                   {typeInfo.description.manifest}
                 </p>
               </div>
             </div>
 
             {/* 潜在的な特徴 */}
-            <div className="bg-white rounded-2xl p-8 lg:p-10 relative overflow-hidden group"
+            <div className="bg-white rounded-2xl p-10 lg:p-12 relative overflow-hidden group"
                  style={{ boxShadow: '0 4px 20px rgba(0,0,0,0.06)' }}>
               <div className="absolute top-0 left-0 w-1.5 h-full rounded-l-2xl"
                    style={{ background: `linear-gradient(180deg, ${typeColor} 0%, ${typeColor}aa 100%)` }}
               />
               <div className="pl-6">
-                <div className="flex items-center gap-4 mb-6">
+                <div className="flex items-center gap-4 mb-8">
                   <div className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl"
                        style={{ background: `${typeColor}15` }}>
                     🔮
@@ -284,10 +250,60 @@ export default function ResultPage() {
                     潜在的な特徴
                   </h2>
                 </div>
-                <p className="text-base lg:text-lg leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.85 }}>
+                <p className="text-base lg:text-lg leading-loose" style={{ color: 'var(--text-primary)', opacity: 0.9, lineHeight: '2' }}>
                   {typeInfo.description.latent}
                 </p>
               </div>
+            </div>
+          </motion.div>
+
+          {/* シェアボタン */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.4 }}
+            className="mb-12"
+          >
+            <h3 className="text-lg lg:text-xl font-bold mb-6 text-center" style={{ color: 'var(--text-primary)' }}>
+              結果をシェアする
+            </h3>
+            <div className="flex justify-center gap-4">
+              <button
+                onClick={() => handleShare('twitter')}
+                className="w-16 h-16 lg:w-20 lg:h-20 rounded-2xl bg-white shadow-lg hover:shadow-xl transition-all hover:scale-105 active:scale-95 flex items-center justify-center"
+                style={{ border: `2px solid #1DA1F2` }}
+                title="Xでシェア"
+              >
+                <svg className="w-8 h-8 lg:w-10 lg:h-10" fill="#1DA1F2" viewBox="0 0 24 24">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+              </button>
+              <button
+                onClick={() => handleShare('line')}
+                className="w-16 h-16 lg:w-20 lg:h-20 rounded-2xl bg-white shadow-lg hover:shadow-xl transition-all hover:scale-105 active:scale-95 flex items-center justify-center"
+                style={{ border: `2px solid #06C755` }}
+                title="LINEでシェア"
+              >
+                <svg className="w-8 h-8 lg:w-10 lg:h-10" fill="#06C755" viewBox="0 0 24 24">
+                  <path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/>
+                </svg>
+              </button>
+              <button
+                onClick={handleCopyLink}
+                className="w-16 h-16 lg:w-20 lg:h-20 rounded-2xl bg-white shadow-lg hover:shadow-xl transition-all hover:scale-105 active:scale-95 flex items-center justify-center"
+                style={{ border: `2px solid ${typeColor}` }}
+                title={copied ? 'コピー済み' : 'リンクをコピー'}
+              >
+                {copied ? (
+                  <svg className="w-8 h-8 lg:w-10 lg:h-10" fill={typeColor} viewBox="0 0 24 24">
+                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
+                  </svg>
+                ) : (
+                  <svg className="w-8 h-8 lg:w-10 lg:h-10" fill={typeColor} viewBox="0 0 24 24">
+                    <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
+                  </svg>
+                )}
+              </button>
             </div>
           </motion.div>
 
@@ -295,7 +311,7 @@ export default function ResultPage() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.4 }}
+            transition={{ delay: 1.6 }}
             className="space-y-4 pb-12"
           >
             <button

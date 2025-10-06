@@ -1,103 +1,239 @@
-import Image from "next/image";
+'use client';
+
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { motion } from 'framer-motion';
+import { Gender } from '@/types';
+import { Header } from '@/components/Header';
 
 export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const router = useRouter();
+  const [selectedGender, setSelectedGender] = useState<Gender | null>(null);
+  const [showAgeModal, setShowAgeModal] = useState(false);
+  const [ageConfirmed, setAgeConfirmed] = useState(false);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+  const handleAgeConfirm = () => {
+    if (!ageConfirmed) {
+      alert('18歳以上であることを確認してください');
+      return;
+    }
+    if (!selectedGender) {
+      alert('性別を選択してください');
+      return;
+    }
+    localStorage.setItem('gender', selectedGender);
+    router.push('/quiz');
+  };
+
+  return (
+    <>
+      <Header />
+      <div className="min-h-screen flex items-center justify-center" style={{
+        background: 'linear-gradient(135deg, #fff5f8 0%, #ffe9f0 100%)',
+        paddingTop: '80px',
+        paddingBottom: '60px',
+      }}>
+        <div className="w-full max-w-md mx-auto px-5">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="space-y-8"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+            {/* メインカード */}
+            <div className="bg-white rounded-[32px] p-8 text-center" style={{ boxShadow: '0 10px 40px rgba(255,107,157,0.15)' }}>
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full mb-6" style={{ background: 'linear-gradient(135deg, #ff6b9d 0%, #ff8fab 100%)' }}>
+                <span className="text-3xl">💕</span>
+              </div>
+
+              <h1 className="text-2xl font-black mb-4" style={{ color: 'var(--text-primary)' }}>
+                性愛タイプ診断
+              </h1>
+
+              <p className="text-sm mb-6 leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+                あなたの性愛スタイルを発見しましょう
+              </p>
+
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => setShowAgeModal(true)}
+                className="w-full py-4 rounded-full font-bold text-white text-lg shadow-lg"
+                style={{
+                  background: 'linear-gradient(135deg, #ff6b9d 0%, #ff8fab 100%)',
+                }}
+              >
+                診断を始める
+              </motion.button>
+            </div>
+
+            {/* 詳細情報 */}
+            <div className="grid gap-4">
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.2 }}
+                className="bg-white/80 backdrop-blur rounded-2xl p-5 flex items-center gap-4"
+                style={{ boxShadow: '0 4px 16px rgba(0,0,0,0.06)' }}
+              >
+                <div className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0" style={{ background: 'rgba(255,107,157,0.1)' }}>
+                  <span className="text-2xl">⏱️</span>
+                </div>
+                <div className="text-left">
+                  <p className="font-bold text-base" style={{ color: 'var(--text-primary)' }}>3分で完了</p>
+                  <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>簡単な質問に答えるだけ</p>
+                </div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.3 }}
+                className="bg-white/80 backdrop-blur rounded-2xl p-5 flex items-center gap-4"
+                style={{ boxShadow: '0 4px 16px rgba(0,0,0,0.06)' }}
+              >
+                <div className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0" style={{ background: 'rgba(255,107,157,0.1)' }}>
+                  <span className="text-2xl">🎯</span>
+                </div>
+                <div className="text-left">
+                  <p className="font-bold text-base" style={{ color: 'var(--text-primary)' }}>精度の高い分析</p>
+                  <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>12種類の詳細なタイプ分類</p>
+                </div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.4 }}
+                className="bg-white/80 backdrop-blur rounded-2xl p-5 flex items-center gap-4"
+                style={{ boxShadow: '0 4px 16px rgba(0,0,0,0.06)' }}
+              >
+                <div className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0" style={{ background: 'rgba(255,107,157,0.1)' }}>
+                  <span className="text-2xl">🔐</span>
+                </div>
+                <div className="text-left">
+                  <p className="font-bold text-base" style={{ color: 'var(--text-primary)' }}>プライバシー保護</p>
+                  <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>完全匿名・個人情報不要</p>
+                </div>
+              </motion.div>
+            </div>
+
+            {/* 注意事項 */}
+            <div className="text-center pt-2">
+              <p className="text-xs leading-relaxed" style={{ color: 'var(--text-muted)' }}>
+                ※ 18歳以上の方のみご利用いただけます<br />
+                ※ 回答内容は匿名で処理されます
+              </p>
+            </div>
+          </motion.div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
+      </div>
+
+      {/* 年齢確認・性別選択モーダル */}
+      {showAgeModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-5">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="absolute inset-0 bg-black/80 backdrop-blur-md"
+            onClick={() => setShowAgeModal(false)}
           />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+            className="relative bg-white rounded-[28px] p-8 max-w-md w-full"
+            style={{ boxShadow: '0 40px 80px rgba(0,0,0,0.3)' }}
+          >
+            <div className="w-16 h-16 mx-auto mb-5 rounded-full flex items-center justify-center text-3xl"
+                 style={{ background: 'linear-gradient(135deg, #ff6b9d 0%, #ff8fab 100%)' }}>
+              🔞
+            </div>
+            <h3 className="text-2xl font-black mb-3 text-center" style={{ color: 'var(--text-primary)' }}>
+              年齢確認
+            </h3>
+            <p className="text-center mb-6 text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+              このサービスは18歳以上の方のみご利用いただけます。
+            </p>
+
+            <label className="flex items-center justify-center gap-3 mb-8 cursor-pointer">
+              <div className="relative">
+                <input
+                  type="checkbox"
+                  checked={ageConfirmed}
+                  onChange={(e) => setAgeConfirmed(e.target.checked)}
+                  className="w-6 h-6 cursor-pointer appearance-none border-2 rounded-lg transition-all"
+                  style={{
+                    borderColor: ageConfirmed ? 'var(--primary)' : '#ddd',
+                    backgroundColor: ageConfirmed ? 'var(--primary)' : 'white',
+                  }}
+                />
+                {ageConfirmed && (
+                  <svg className="absolute top-0.5 left-0.5 w-5 h-5 pointer-events-none" viewBox="0 0 14 14" fill="none">
+                    <path d="M11.6666 3.5L5.24998 9.91667L2.33331 7" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                )}
+              </div>
+              <span className="text-base font-bold" style={{ color: 'var(--text-primary)' }}>
+                私は18歳以上です
+              </span>
+            </label>
+
+            {ageConfirmed && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                transition={{ duration: 0.3 }}
+              >
+                <p className="text-center mb-4 text-sm font-bold" style={{ color: 'var(--text-primary)' }}>
+                  性別を選択してください
+                </p>
+                <div className="grid grid-cols-2 gap-4 mb-6">
+                  <button
+                    onClick={() => setSelectedGender('male')}
+                    className="relative rounded-[20px] py-8 px-4 transition-all"
+                    style={{
+                      background: selectedGender === 'male' ? 'linear-gradient(135deg, #ff6b9d 0%, #ff8fab 100%)' : '#f8f9fa',
+                      boxShadow: selectedGender === 'male' ? '0 8px 20px rgba(255,107,157,0.3)' : '0 2px 8px rgba(0,0,0,0.04)',
+                    }}
+                  >
+                    <div className="text-5xl mb-3">👨</div>
+                    <div className="text-lg font-bold" style={{ color: selectedGender === 'male' ? 'white' : 'var(--text-primary)' }}>
+                      男性
+                    </div>
+                  </button>
+
+                  <button
+                    onClick={() => setSelectedGender('female')}
+                    className="relative rounded-[20px] py-8 px-4 transition-all"
+                    style={{
+                      background: selectedGender === 'female' ? 'linear-gradient(135deg, #ff6b9d 0%, #ff8fab 100%)' : '#f8f9fa',
+                      boxShadow: selectedGender === 'female' ? '0 8px 20px rgba(255,107,157,0.3)' : '0 2px 8px rgba(0,0,0,0.04)',
+                    }}
+                  >
+                    <div className="text-5xl mb-3">👩</div>
+                    <div className="text-lg font-bold" style={{ color: selectedGender === 'female' ? 'white' : 'var(--text-primary)' }}>
+                      女性
+                    </div>
+                  </button>
+                </div>
+              </motion.div>
+            )}
+
+            <button
+              onClick={handleAgeConfirm}
+              disabled={!ageConfirmed || !selectedGender}
+              className="w-full py-4 rounded-full text-lg font-bold text-white transition-all disabled:opacity-30 disabled:cursor-not-allowed"
+              style={{
+                background: (ageConfirmed && selectedGender) ? 'linear-gradient(135deg, #ff6b9d 0%, #ff8fab 100%)' : '#ddd',
+                boxShadow: (ageConfirmed && selectedGender) ? '0 8px 24px rgba(255,107,157,0.4)' : 'none',
+              }}
+            >
+              診断をはじめる
+            </button>
+          </motion.div>
+        </div>
+      )}
+    </>
   );
 }

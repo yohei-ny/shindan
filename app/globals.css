@@ -87,3 +87,8 @@ body {
 .animate-slide-up {
   animation: slideUp 0.3s ease-out;
 }
+
+/* カスタム余白クラス */
+.yohaku {
+  margin: 20px 10px !important;
+}

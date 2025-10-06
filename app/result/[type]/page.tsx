@@ -248,11 +248,10 @@ export default function ResultPage() {
             style={{ marginTop: '15px' }}
           >
             {/* 顕在的な特徴 */}
-            <div className="bg-white rounded-2xl p-8 lg:p-10 relative overflow-hidden"
+            <div className="bg-white rounded-2xl p-8 lg:p-10 relative overflow-hidden yohaku"
                  style={{
                    boxShadow: '0 4px 20px rgba(0,0,0,0.06)',
-                   border: `2px solid ${typeColor}20`,
-                   margin: '20px 10px'
+                   border: `2px solid ${typeColor}20`
                  }}>
               <div className="mb-6">
                 <div className="flex items-center gap-3 mb-6 pb-4" style={{ borderBottom: `2px solid ${typeColor}20` }}>
@@ -269,7 +268,8 @@ export default function ResultPage() {
                     color: 'var(--text-primary)',
                     opacity: 0.9,
                     lineHeight: '2.2',
-                    letterSpacing: '0.03em'
+                    letterSpacing: '0.03em',
+                      padding: '20px'
                   }}>
                     {highlightText(typeInfo.description.manifest, typeColor)}
                   </p>
@@ -278,11 +278,10 @@ export default function ResultPage() {
             </div>
 
             {/* 潜在的な特徴 */}
-            <div className="bg-white rounded-2xl p-8 lg:p-10 relative overflow-hidden"
+            <div className="bg-white rounded-2xl p-8 lg:p-10 relative overflow-hidden yohaku"
                  style={{
                    boxShadow: '0 4px 20px rgba(0,0,0,0.06)',
-                   border: `2px solid ${typeColor}20`,
-                   margin: '20px 10px'
+                   border: `2px solid ${typeColor}20`
                  }}>
               <div className="mb-6">
                 <div className="flex items-center gap-3 mb-6 pb-4" style={{ borderBottom: `2px solid ${typeColor}20` }}>
@@ -299,7 +298,8 @@ export default function ResultPage() {
                     color: 'var(--text-primary)',
                     opacity: 0.9,
                     lineHeight: '2.2',
-                    letterSpacing: '0.03em'
+                    letterSpacing: '0.03em',
+                    padding: '20px'
                   }}>
                     {highlightText(typeInfo.description.latent, typeColor)}
                   </p>

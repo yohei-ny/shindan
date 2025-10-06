@@ -126,7 +126,7 @@ export default function ResultPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
-                className="text-6xl lg:text-7xl font-black mb-6 tracking-tight"
+                className="text-5xl sm:text-6xl lg:text-7xl font-black mb-6 tracking-tight"
                 style={{ textShadow: '0 4px 20px rgba(0,0,0,0.1)' }}
               >
                 {type}
@@ -136,7 +136,7 @@ export default function ResultPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
-                className="text-2xl lg:text-3xl font-black mb-4"
+                className="text-xl sm:text-2xl lg:text-3xl font-black mb-4"
               >
                 {typeInfo.name}
               </motion.div>
@@ -145,7 +145,7 @@ export default function ResultPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
-                className="text-base lg:text-lg opacity-95 max-w-2xl mx-auto leading-relaxed"
+                className="text-sm sm:text-base lg:text-lg opacity-95 max-w-2xl mx-auto leading-relaxed"
               >
                 {typeInfo.tagline}
               </motion.div>
@@ -190,7 +190,7 @@ export default function ResultPage() {
             <h3 className="text-xl lg:text-2xl font-black mb-12 text-center" style={{ color: 'var(--text-primary)' }}>
               あなたのスコア
             </h3>
-            <div className="grid grid-cols-5 gap-5" style={{ margin: '5px 5px 15px 5px' }}>
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 lg:gap-5" style={{ margin: '5px 5px 15px 5px' }}>
               {[
                 { label: 'L', sublabel: '性欲', value: result.scores.L, max: 16 },
                 { label: 'E', sublabel: '新奇性', value: result.scores.E, max: 9 },
@@ -203,7 +203,7 @@ export default function ResultPage() {
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 0.8 + index * 0.08, type: 'spring', bounce: 0.4 }}
-                  className="bg-white rounded-xl p-7 text-center relative overflow-hidden"
+                  className="bg-white rounded-xl p-4 sm:p-6 lg:p-7 text-center relative overflow-hidden"
                   style={{ boxShadow: '0 4px 16px rgba(0,0,0,0.06)' }}
                 >
                   <div className="absolute top-0 left-0 right-0 h-1 rounded-t-xl"
@@ -249,10 +249,11 @@ export default function ResultPage() {
             style={{ marginTop: '15px' }}
           >
             {/* 顕在的な特徴 */}
-            <div className="bg-white rounded-2xl p-8 lg:p-10 relative overflow-hidden yohaku"
+            <div className="bg-white rounded-2xl p-6 sm:p-8 lg:p-10 relative overflow-hidden"
                  style={{
                    boxShadow: '0 4px 20px rgba(0,0,0,0.06)',
-                   border: `2px solid ${typeColor}20`
+                   border: `2px solid ${typeColor}20`,
+                   margin: '20px 5px'
                  }}>
               <div className="mb-6">
                 <div className="flex items-center gap-3 mb-6 pb-4" style={{ borderBottom: `2px solid ${typeColor}20` }}>
@@ -278,10 +279,11 @@ export default function ResultPage() {
             </div>
 
             {/* 潜在的な特徴 */}
-            <div className="bg-white rounded-2xl p-8 lg:p-10 relative overflow-hidden yohaku"
+            <div className="bg-white rounded-2xl p-6 sm:p-8 lg:p-10 relative overflow-hidden"
                  style={{
                    boxShadow: '0 4px 20px rgba(0,0,0,0.06)',
-                   border: `2px solid ${typeColor}20`
+                   border: `2px solid ${typeColor}20`,
+                   margin: '20px 5px'
                  }}>
               <div className="mb-6">
                 <div className="flex items-center gap-3 mb-6 pb-4" style={{ borderBottom: `2px solid ${typeColor}20` }}>

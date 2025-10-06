@@ -5,8 +5,8 @@ import Link from 'next/link';
 export function Footer() {
   return (
     <footer className="bg-white border-t border-gray-100 mt-20">
-      <div className="max-w-6xl mx-auto px-6 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-8">
           {/* サービス情報 */}
           <div>
             <h3 className="font-bold text-lg mb-4" style={{ color: 'var(--text-primary)' }}>

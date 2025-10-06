@@ -177,11 +177,11 @@ export default function QuizPage() {
                           {String.fromCharCode(65 + index)}
                         </div>
                         <div className="flex-1">
-                          <div className="text-xl lg:text-2xl font-bold mb-3 leading-snug transition-colors"
+                          <div className="text-lg sm:text-xl lg:text-2xl font-bold mb-2 lg:mb-3 leading-snug transition-colors"
                                style={{ color: isSelected ? 'var(--primary)' : 'var(--text-primary)' }}>
                             {option.label}
                           </div>
-                          <div className="text-base lg:text-lg leading-relaxed"
+                          <div className="text-sm sm:text-base lg:text-lg leading-relaxed"
                                style={{ color: isSelected ? 'var(--primary)' : 'var(--text-secondary)', opacity: 0.85 }}>
                             {option.subLabel}
                           </div>

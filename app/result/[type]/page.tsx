@@ -245,6 +245,7 @@ export default function ResultPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.2 }}
             className="space-y-8 mb-16"
+            style={{ marginTop: '15px' }}
           >
             {/* 顕在的な特徴 */}
             <div className="bg-white rounded-2xl p-8 lg:p-10 relative overflow-hidden"

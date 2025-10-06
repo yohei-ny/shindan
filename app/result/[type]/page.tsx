@@ -18,7 +18,7 @@ function getTypeColor(type: DiagnosisType): string {
 }
 
 // 重要なキーワードを強調する関数
-function highlightText(text: string, color: string) {
+function highlightText(text: string) {
   // 句点で分割して、各文の重要部分を太字にする
   const sentences = text.split('。').filter(s => s.trim());
 
@@ -269,10 +269,9 @@ export default function ResultPage() {
                     color: 'var(--text-primary)',
                     opacity: 0.9,
                     lineHeight: '2.2',
-                    letterSpacing: '0.03em',
-                      padding: '20px'
+                    letterSpacing: '0.03em'
                   }}>
-                    {highlightText(typeInfo.description.manifest, typeColor)}
+                    {highlightText(typeInfo.description.manifest)}
                   </p>
                 </div>
               </div>
@@ -299,10 +298,9 @@ export default function ResultPage() {
                     color: 'var(--text-primary)',
                     opacity: 0.9,
                     lineHeight: '2.2',
-                    letterSpacing: '0.03em',
-                    padding: '20px'
+                    letterSpacing: '0.03em'
                   }}>
-                    {highlightText(typeInfo.description.latent, typeColor)}
+                    {highlightText(typeInfo.description.latent)}
                   </p>
                 </div>
               </div>

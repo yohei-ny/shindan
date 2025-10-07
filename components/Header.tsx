@@ -44,6 +44,14 @@ export function Header() {
               診断をする
             </button>
             <button
+              onClick={() => router.push('/types')}
+              className="text-sm font-bold hover:opacity-70 transition-opacity"
+              style={{ color: 'var(--text-secondary)' }}
+            >
+              全タイプ一覧
+            </button>
+            <button
+              onClick={() => router.push('/about')}
               className="text-sm font-bold hover:opacity-70 transition-opacity"
               style={{ color: 'var(--text-secondary)' }}
             >

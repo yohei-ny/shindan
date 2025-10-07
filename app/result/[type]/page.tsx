@@ -240,6 +240,61 @@ export default function ResultPage() {
             </div>
           </motion.div>
 
+          {/* タイプイラスト画像 */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.0 }}
+            className="mb-12"
+            style={{ marginTop: '30px' }}
+          >
+            <div className="bg-white rounded-2xl p-8 lg:p-10 text-center"
+                 style={{
+                   boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
+                   border: `3px solid ${typeColor}30`,
+                 }}>
+              <h3 className="text-xl lg:text-2xl font-black mb-6" style={{ color: typeColor }}>
+                {typeInfo.name} のイメージ
+              </h3>
+              <div className="relative w-full max-w-md mx-auto aspect-square bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl overflow-hidden"
+                   style={{ border: `2px solid ${typeColor}20` }}>
+                {/* 画像プレースホルダー */}
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="text-center">
+                    <div className="text-6xl mb-4 opacity-30">🖼️</div>
+                    <p className="text-sm font-bold opacity-40" style={{ color: 'var(--text-secondary)' }}>
+                      画像を配置してください
+                    </p>
+                    <p className="text-xs opacity-30 mt-2" style={{ color: 'var(--text-muted)' }}>
+                      public/images/{type}.png
+                    </p>
+                  </div>
+                </div>
+                {/* 実際の画像（画像ファイルを追加後に表示される） */}
+                <img
+                  src={`/images/${type}.png`}
+                  alt={`${typeInfo.name}のイメージ`}
+                  className="w-full h-full object-cover"
+                  onError={(e) => {
+                    // 画像が見つからない場合は非表示
+                    (e.target as HTMLImageElement).style.display = 'none';
+                  }}
+                  onLoad={(e) => {
+                    // 画像が読み込まれたらプレースホルダーを非表示
+                    const parent = (e.target as HTMLImageElement).parentElement;
+                    if (parent) {
+                      const placeholder = parent.querySelector('.absolute');
+                      if (placeholder) (placeholder as HTMLElement).style.display = 'none';
+                    }
+                  }}
+                />
+              </div>
+              <p className="text-sm mt-6 opacity-70" style={{ color: 'var(--text-secondary)' }}>
+                あなたのタイプを象徴するイラストです
+              </p>
+            </div>
+          </motion.div>
+
           {/* 詳細カード */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}

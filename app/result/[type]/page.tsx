@@ -95,8 +95,8 @@ export default function ResultPage() {
         }
       `}</style>
       <div className="min-h-screen" style={{
-        background: 'linear-gradient(135deg, #fff5f8 0%, #ffe9f0 50%, #ffd6e7 100%)',
-        paddingTop: '80px',
+        background: 'linear-gradient(180deg, #f8f4f9 0%, #e8d5ed 50%, #d4b5dc 100%)',
+        paddingTop: '100px',
       }}>
       <div className="px-6 py-12 flex justify-center">
         <div className="w-full max-w-3xl">

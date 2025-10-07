@@ -73,130 +73,95 @@ export default function QuizPage() {
   return (
     <>
       <Header />
-      <div className="min-h-screen flex flex-col" style={{
-        background: 'linear-gradient(135deg, #fff5f8 0%, #ffe9f0 50%, #ffd6e7 100%)',
-        paddingTop: '80px',
+      <div className="min-h-screen flex flex-col items-center justify-center" style={{
+        background: 'linear-gradient(180deg, #f8f4f9 0%, #e8d5ed 50%, #d4b5dc 100%)',
+        paddingTop: '100px',
+        paddingBottom: '80px',
       }}>
-        {/* プログレスバー */}
-        <div className="bg-white/98 backdrop-blur-xl shadow-sm py-8">
-          <div className="max-w-3xl mx-auto px-8">
-            <div className="flex justify-between items-center mb-6">
-              <div>
-                <div className="text-sm font-medium mb-1" style={{ color: 'var(--text-muted)' }}>
-                  質問 {currentQuestion + 1} / {questions.length}
-                </div>
-                <div className="text-3xl font-black" style={{ color: 'var(--text-primary)' }}>
-                  {Math.round(progress)}%
-                </div>
-              </div>
-              <motion.div
-                initial={{ scale: 0.9, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                className="w-20 h-20 rounded-full flex items-center justify-center text-3xl font-black text-white"
-                style={{ background: 'linear-gradient(135deg, #ff6b9d 0%, #ff8fab 100%)' }}
-              >
-                {currentQuestion + 1}
-              </motion.div>
+        <div className="w-full max-w-2xl mx-auto px-6">
+          {/* プログレスバー */}
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mb-8"
+          >
+            <div className="flex items-center justify-between mb-4">
+              <span className="text-lg font-bold" style={{ color: '#4a5568' }}>
+                QUESTION
+              </span>
+              <span className="text-2xl font-black" style={{ color: '#2d3748' }}>
+                {currentQuestion + 1} <span className="text-lg font-normal" style={{ color: '#a0aec0' }}>/ {questions.length}</span>
+              </span>
             </div>
-            <div className="h-2.5 bg-gray-100 rounded-full overflow-hidden">
+            <div className="h-3 bg-white/50 rounded-full overflow-hidden" style={{ boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.1)' }}>
               <motion.div
                 className="h-full rounded-full"
-                style={{ background: 'linear-gradient(90deg, #ff6b9d 0%, #ff8fab 100%)' }}
+                style={{ background: 'linear-gradient(90deg, #4a90e2 0%, #357abd 100%)' }}
                 initial={{ width: 0 }}
                 animate={{ width: `${progress}%` }}
                 transition={{ duration: 0.5, ease: 'easeOut' }}
               />
             </div>
-          </div>
-        </div>
+          </motion.div>
 
-        {/* メインコンテンツ */}
-        <div className="flex-1 flex items-center justify-center px-8 py-16">
-          <div className="w-full max-w-3xl">
+          {/* 質問カード */}
           <AnimatePresence mode="wait">
             <motion.div
               key={currentQuestion}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
               transition={{ duration: 0.4 }}
+              className="bg-white rounded-[40px] p-10 sm:p-14 relative overflow-hidden"
+              style={{
+                boxShadow: '0 20px 60px rgba(0,0,0,0.12)',
+                border: '1px solid rgba(255,255,255,0.8)'
+              }}
             >
+              {/* 装飾 */}
+              <div className="absolute top-6 right-6 text-4xl opacity-10">✨</div>
+
               {/* 質問文 */}
-              <div className="mb-14 text-center">
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.1 }}
-                  className="inline-block px-6 py-3 rounded-full mb-10"
-                  style={{ backgroundColor: 'rgba(255, 107, 157, 0.1)' }}
-                >
-                  <span className="text-lg font-bold" style={{ color: 'var(--primary)' }}>Q{currentQuestion + 1}</span>
-                </motion.div>
-                <h2 className="text-3xl lg:text-4xl font-black leading-relaxed px-6" style={{ color: 'var(--text-primary)' }}>
+              <div className="mb-10 text-center">
+                <h2 className="text-2xl sm:text-3xl font-black leading-relaxed" style={{ color: '#2d3748' }}>
                   {question.text}
                 </h2>
               </div>
 
               {/* 選択肢 */}
-              <div className="space-y-6 mb-10">
+              <div className="space-y-4 mb-8">
                 {question.options.map((option, index) => {
                   const isSelected = selectedOption === index;
                   return (
                     <motion.button
                       key={index}
-                      initial={{ opacity: 0, y: 20 }}
+                      initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.1 + index * 0.05 }}
-                      whileHover={{ scale: 1.01, y: -2 }}
-                      whileTap={{ scale: 0.99 }}
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
                       onClick={() => handleSelectOption(index)}
-                      className="w-full text-left bg-white rounded-[28px] lg:rounded-[32px] p-8 lg:p-10 transition-all relative overflow-hidden group"
+                      className="w-full text-center bg-white rounded-2xl p-6 transition-all relative"
                       style={{
-                        border: isSelected ? '3px solid var(--primary)' : '2px solid #f0f0f0',
-                        boxShadow: isSelected ? '0 12px 32px rgba(255,107,157,0.2)' : '0 2px 12px rgba(0,0,0,0.04)',
+                        border: isSelected ? '3px solid #4a90e2' : '2px solid #e2e8f0',
+                        boxShadow: isSelected ? '0 8px 24px rgba(74,144,226,0.2)' : '0 2px 8px rgba(0,0,0,0.04)',
+                        background: isSelected ? 'linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%)' : 'white'
                       }}
                     >
-                      {isSelected && (
-                        <motion.div
-                          layoutId="selectedBg"
-                          className="absolute inset-0 rounded-[28px] lg:rounded-[32px]"
-                          style={{
-                            background: 'linear-gradient(135deg, rgba(255,107,157,0.05) 0%, rgba(255,143,171,0.08) 100%)',
-                          }}
-                          initial={false}
-                          transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
-                        />
-                      )}
-
-                      <div className="relative flex items-start gap-5">
-                        <div className="flex-shrink-0 w-10 h-10 lg:w-12 lg:h-12 rounded-full flex items-center justify-center text-base lg:text-lg font-bold transition-all"
-                             style={{
-                               background: isSelected ? 'linear-gradient(135deg, #ff6b9d 0%, #ff8fab 100%)' : '#f8f9fa',
-                               color: isSelected ? 'white' : 'var(--text-muted)',
-                             }}>
-                          {String.fromCharCode(65 + index)}
-                        </div>
-                        <div className="flex-1">
-                          <div className="text-lg sm:text-xl lg:text-2xl font-bold mb-2 lg:mb-3 leading-snug transition-colors"
-                               style={{ color: isSelected ? 'var(--primary)' : 'var(--text-primary)' }}>
-                            {option.label}
-                          </div>
-                          <div className="text-sm sm:text-base lg:text-lg leading-relaxed"
-                               style={{ color: isSelected ? 'var(--primary)' : 'var(--text-secondary)', opacity: 0.85 }}>
-                            {option.subLabel}
-                          </div>
-                        </div>
+                      <div className="text-lg sm:text-xl font-bold" style={{
+                        color: isSelected ? '#1976d2' : '#2d3748'
+                      }}>
+                        {option.label}
                       </div>
 
                       {isSelected && (
                         <motion.div
-                          initial={{ scale: 0, rotate: -180 }}
-                          animate={{ scale: 1, rotate: 0 }}
-                          transition={{ type: 'spring', bounce: 0.5, delay: 0.1 }}
-                          className="absolute top-4 lg:top-6 right-4 lg:right-6 w-8 h-8 rounded-full flex items-center justify-center"
-                          style={{ background: 'linear-gradient(135deg, #ff6b9d 0%, #ff8fab 100%)' }}
+                          initial={{ scale: 0 }}
+                          animate={{ scale: 1 }}
+                          className="absolute top-4 right-4 w-6 h-6 rounded-full flex items-center justify-center"
+                          style={{ background: '#4a90e2' }}
                         >
-                          <svg width="16" height="16" viewBox="0 0 14 14" fill="none">
+                          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                             <path d="M11.6666 3.5L5.24998 9.91667L2.33331 7" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
                           </svg>
                         </motion.div>
@@ -211,38 +176,38 @@ export default function QuizPage() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.4 }}
-                className="flex items-center justify-center gap-3 text-base px-8 py-5 rounded-2xl mb-12"
+                className="text-center py-4 px-6 rounded-xl mb-8"
                 style={{
-                  color: 'var(--text-muted)',
-                  backgroundColor: 'rgba(255,255,255,0.6)',
+                  background: 'rgba(74,144,226,0.1)',
+                  color: '#4a5568'
                 }}
               >
-                <span className="text-2xl">💡</span>
-                <span>直感で答えることをおすすめします</span>
+                <span className="text-xl mr-2">💡</span>
+                <span className="text-sm">直感で答えることをおすすめします</span>
               </motion.div>
 
               {/* ナビゲーションボタン */}
-              <div className="flex gap-6">
-                <button
-                  onClick={handleBack}
-                  disabled={currentQuestion === 0}
-                  className="px-10 py-6 rounded-2xl font-bold text-lg transition-all disabled:opacity-20 disabled:cursor-not-allowed"
-                  style={{
-                    border: '2px solid #e0e0e0',
-                    color: 'var(--text-primary)',
-                    backgroundColor: 'white',
-                    minWidth: '140px',
-                  }}
-                >
-                  ← 戻る
-                </button>
+              <div className="flex gap-4">
+                {currentQuestion > 0 && (
+                  <button
+                    onClick={handleBack}
+                    className="px-8 py-4 rounded-xl font-bold text-base transition-all hover:scale-105"
+                    style={{
+                      border: '2px solid #e2e8f0',
+                      color: '#4a5568',
+                      backgroundColor: 'white',
+                    }}
+                  >
+                    ← ひとつ前に戻る
+                  </button>
+                )}
                 <button
                   onClick={handleNext}
                   disabled={selectedOption === null}
-                  className="flex-1 px-10 py-6 rounded-2xl font-bold text-xl text-white transition-all disabled:opacity-30 disabled:cursor-not-allowed hover:scale-[1.02]"
+                  className="flex-1 px-8 py-4 rounded-xl font-bold text-lg text-white transition-all disabled:opacity-30 disabled:cursor-not-allowed hover:scale-105"
                   style={{
-                    background: selectedOption !== null ? 'linear-gradient(135deg, #ff6b9d 0%, #ff8fab 100%)' : '#ddd',
-                    boxShadow: selectedOption !== null ? '0 8px 24px rgba(255,107,157,0.35)' : 'none',
+                    background: selectedOption !== null ? 'linear-gradient(135deg, #ff6b9d 0%, #ff8fab 100%)' : '#cbd5e0',
+                    boxShadow: selectedOption !== null ? '0 8px 24px rgba(255,107,157,0.3)' : 'none',
                   }}
                 >
                   {currentQuestion === questions.length - 1 ? '結果を見る →' : '次へ →'}
@@ -251,10 +216,6 @@ export default function QuizPage() {
             </motion.div>
           </AnimatePresence>
         </div>
-      </div>
-
-        {/* スペーサー（フッター用） */}
-        <div style={{ height: '40px' }}></div>
       </div>
       <Footer />
     </>

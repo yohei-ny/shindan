@@ -57,7 +57,7 @@ export default function TypesPage() {
     <>
       <Header />
       <div className="min-h-screen" style={{
-        background: 'linear-gradient(180deg, #ffffff 0%, #fff5f8 100%)',
+        background: 'linear-gradient(180deg, #f8f4f9 0%, #e8d5ed 50%, #d4b5dc 100%)',
         paddingTop: '100px',
         paddingBottom: '80px',
       }}>
@@ -66,15 +66,15 @@ export default function TypesPage() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-center mb-20"
+            className="text-center mb-16"
           >
-            <h1 className="text-4xl sm:text-5xl font-black mb-4" style={{
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black mb-6" style={{
               color: '#2d3748',
               letterSpacing: '-0.02em'
             }}>
               全12タイプ紹介
             </h1>
-            <p className="text-lg" style={{ color: '#718096' }}>
+            <p className="text-base sm:text-lg" style={{ color: '#4a5568' }}>
               あなたの性愛スタイルを見つけましょう
             </p>
           </motion.div>
@@ -89,23 +89,23 @@ export default function TypesPage() {
               className="mb-20"
             >
               {/* カテゴリーヘッダー */}
-              <div className="text-center mb-12">
-                <div className="inline-block px-6 py-3 rounded-full mb-4"
+              <div className="text-center mb-10">
+                <div className="inline-block px-8 py-4 rounded-full"
                      style={{
-                       background: `${getCategoryColor(category.key)}15`,
-                       border: `2px solid ${getCategoryColor(category.key)}30`
+                       background: `${getCategoryColor(category.key)}20`,
+                       border: `3px solid ${getCategoryColor(category.key)}40`
                      }}>
-                  <span className="text-2xl font-black" style={{ color: getCategoryColor(category.key) }}>
+                  <span className="text-xl sm:text-2xl font-black" style={{ color: getCategoryColor(category.key) }}>
                     {category.name}
                   </span>
-                  <span className="text-base ml-2" style={{ color: '#718096' }}>
+                  <span className="text-base sm:text-lg ml-3" style={{ color: '#4a5568' }}>
                     {category.subtitle}
                   </span>
                 </div>
               </div>
 
               {/* タイプカードグリッド */}
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
                 {category.types.map((type, index) => {
                   const typeInfo = getTypeDescription(type);
                   const color = getTypeColor(type);
@@ -116,10 +116,10 @@ export default function TypesPage() {
                       initial={{ opacity: 0, scale: 0.9 }}
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ delay: 0.3 + catIndex * 0.2 + index * 0.05 }}
-                      className="bg-white rounded-3xl overflow-hidden cursor-pointer transition-all hover:-translate-y-2 hover:shadow-2xl"
+                      className="bg-white rounded-3xl overflow-hidden cursor-pointer transition-all hover:-translate-y-3 hover:shadow-2xl"
                       style={{
-                        boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
-                        border: '1px solid #f0f0f0'
+                        boxShadow: '0 8px 32px rgba(0,0,0,0.12)',
+                        border: '2px solid rgba(255,255,255,0.8)'
                       }}
                       onClick={() => handleTypeClick(type)}
                     >
@@ -147,20 +147,21 @@ export default function TypesPage() {
                       </div>
 
                       {/* テキストエリア */}
-                      <div className="p-6">
+                      <div className="p-6 lg:p-8">
                         {/* タイプコード */}
-                        <div className="text-center mb-3">
-                          <div className="inline-block px-4 py-1.5 rounded-full text-sm font-bold"
+                        <div className="text-center mb-4">
+                          <div className="inline-block px-5 py-2 rounded-full text-base font-bold"
                                style={{
-                                 background: `${color}15`,
-                                 color: color
+                                 background: `${color}20`,
+                                 color: color,
+                                 border: `2px solid ${color}40`
                                }}>
                             {type}
                           </div>
                         </div>
 
                         {/* タイプ名 */}
-                        <h3 className="text-lg font-black text-center mb-3" style={{
+                        <h3 className="text-lg sm:text-xl font-black text-center mb-4" style={{
                           color: '#2d3748',
                           lineHeight: '1.4'
                         }}>
@@ -168,19 +169,20 @@ export default function TypesPage() {
                         </h3>
 
                         {/* キャッチコピー */}
-                        <p className="text-sm text-center mb-5 leading-relaxed" style={{
-                          color: '#718096',
-                          minHeight: '3rem'
+                        <p className="text-sm sm:text-base text-center mb-6 leading-relaxed" style={{
+                          color: '#4a5568',
+                          minHeight: '3.5rem'
                         }}>
                           {typeInfo.tagline}
                         </p>
 
                         {/* 詳しく見るボタン */}
                         <button
-                          className="w-full py-3 rounded-xl text-sm font-bold transition-all hover:opacity-90"
+                          className="w-full py-4 rounded-2xl text-base font-bold transition-all hover:scale-105"
                           style={{
                             background: color,
-                            color: 'white'
+                            color: 'white',
+                            boxShadow: `0 4px 16px ${color}40`
                           }}
                         >
                           詳しく見る
@@ -200,23 +202,24 @@ export default function TypesPage() {
             transition={{ delay: 1.0 }}
             className="text-center mt-20 mb-10"
           >
-            <div className="bg-gradient-to-br from-pink-50 to-purple-50 rounded-3xl p-12 sm:p-16"
+            <div className="bg-white rounded-[40px] p-12 sm:p-16"
                  style={{
-                   boxShadow: '0 8px 32px rgba(255,107,157,0.15)',
-                   border: '1px solid rgba(255,107,157,0.1)'
+                   boxShadow: '0 20px 60px rgba(0,0,0,0.12)',
+                   border: '2px solid rgba(255,255,255,0.8)'
                  }}>
-              <h2 className="text-3xl sm:text-4xl font-black mb-4" style={{ color: '#2d3748' }}>
+              <h2 className="text-3xl sm:text-4xl font-black mb-6" style={{ color: '#2d3748' }}>
                 あなたはどのタイプ？
               </h2>
-              <p className="text-lg mb-8" style={{ color: '#718096' }}>
-                3分で完了する診断で、あなたの性愛タイプを発見
+              <p className="text-base sm:text-lg mb-10" style={{ color: '#4a5568' }}>
+                10個の質問に答えて、あなたの性愛タイプを発見しよう
               </p>
               <button
                 onClick={() => router.push('/')}
-                className="px-12 py-5 rounded-full text-lg font-bold text-white transition-all hover:scale-105 active:scale-95"
+                className="px-16 py-6 rounded-2xl text-lg font-bold text-white transition-all hover:scale-105 active:scale-95"
                 style={{
-                  background: 'linear-gradient(135deg, #ff6b9d 0%, #ff8fab 100%)',
-                  boxShadow: '0 10px 30px rgba(255,107,157,0.3)',
+                  background: 'linear-gradient(135deg, #4a90e2 0%, #357abd 100%)',
+                  border: '3px solid #2d5f8d',
+                  boxShadow: '0 8px 24px rgba(74,144,226,0.4)',
                 }}
               >
                 診断を始める →

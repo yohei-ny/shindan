@@ -119,19 +119,19 @@ export default function QuizPage() {
               }}
             >
               {/* カード内コンテンツ - 大きな余白 */}
-              <div className="p-12 sm:p-16">
+              <div className="px-8 py-12 sm:px-12 sm:py-16">
                 {/* 質問文 */}
-                <div className="mb-16 text-center">
-                  <h2 className="text-2xl sm:text-3xl font-black leading-relaxed" style={{
+                <div className="mb-12 text-center">
+                  <h2 className="text-xl sm:text-2xl font-black leading-relaxed" style={{
                     color: '#2d3748',
-                    lineHeight: '1.6'
+                    lineHeight: '1.7'
                   }}>
                     {question.text}
                   </h2>
                 </div>
 
                 {/* 選択肢 - 余白を大きく */}
-                <div className="space-y-5 mb-12">
+                <div className="space-y-4 mb-10">
                   {question.options.map((option, index) => {
                     const isSelected = selectedOption === index;
                     return (
@@ -143,14 +143,14 @@ export default function QuizPage() {
                         whileHover={{ scale: 1.01 }}
                         whileTap={{ scale: 0.99 }}
                         onClick={() => handleSelectOption(index)}
-                        className="w-full text-center rounded-2xl py-6 px-8 transition-all relative"
+                        className="w-full text-center rounded-xl py-5 px-6 transition-all relative"
                         style={{
-                          border: isSelected ? '3px solid #4a90e2' : '2px solid #e2e8f0',
-                          boxShadow: isSelected ? '0 8px 24px rgba(74,144,226,0.25)' : '0 2px 8px rgba(0,0,0,0.04)',
-                          background: isSelected ? 'linear-gradient(135deg, #e3f2fd 0%, #f0f9ff 100%)' : 'white'
+                          border: isSelected ? '3px solid #4a90e2' : '1px solid #e2e8f0',
+                          boxShadow: isSelected ? '0 6px 20px rgba(74,144,226,0.25)' : 'none',
+                          background: isSelected ? '#e3f2fd' : '#fafafa'
                         }}
                       >
-                        <div className="text-lg sm:text-xl font-bold" style={{
+                        <div className="text-base sm:text-lg font-bold" style={{
                           color: isSelected ? '#1976d2' : '#2d3748'
                         }}>
                           {option.label}
@@ -179,43 +179,43 @@ export default function QuizPage() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.4 }}
-                  className="text-center py-5 px-6 rounded-2xl mb-10"
+                  className="text-center py-4 px-5 rounded-xl mb-8"
                   style={{
                     background: 'rgba(74,144,226,0.08)',
                     color: '#4a5568'
                   }}
                 >
-                  <span className="text-2xl mr-2">💡</span>
-                  <span className="text-base">直感で答えることをおすすめします</span>
+                  <span className="text-lg mr-2">💡</span>
+                  <span className="text-sm">直感で答えることをおすすめします</span>
                 </motion.div>
+              </div>
 
-                {/* ナビゲーションボタン */}
-                <div className="flex gap-4">
-                  {currentQuestion > 0 && (
-                    <button
-                      onClick={handleBack}
-                      className="px-10 py-5 rounded-2xl font-bold text-base transition-all hover:scale-105"
-                      style={{
-                        border: '2px solid #e2e8f0',
-                        color: '#4a5568',
-                        backgroundColor: 'white',
-                      }}
-                    >
-                      ← ひとつ前に戻る
-                    </button>
-                  )}
+              {/* ナビゲーションボタン - カードの外下部 */}
+              <div className="px-8 pb-8 flex gap-3">
+                {currentQuestion > 0 && (
                   <button
-                    onClick={handleNext}
-                    disabled={selectedOption === null}
-                    className="flex-1 px-10 py-5 rounded-2xl font-bold text-xl text-white transition-all disabled:opacity-30 disabled:cursor-not-allowed hover:scale-105"
+                    onClick={handleBack}
+                    className="px-8 py-4 rounded-xl font-bold text-sm transition-all hover:opacity-80"
                     style={{
-                      background: selectedOption !== null ? 'linear-gradient(135deg, #ff6b9d 0%, #ff8fab 100%)' : '#cbd5e0',
-                      boxShadow: selectedOption !== null ? '0 10px 30px rgba(255,107,157,0.35)' : 'none',
+                      border: '2px solid #e2e8f0',
+                      color: '#4a5568',
+                      backgroundColor: 'white',
                     }}
                   >
-                    {currentQuestion === questions.length - 1 ? '結果を見る →' : '次へ →'}
+                    ← ひとつ前に戻る
                   </button>
-                </div>
+                )}
+                <button
+                  onClick={handleNext}
+                  disabled={selectedOption === null}
+                  className="flex-1 px-8 py-4 rounded-xl font-bold text-base text-white transition-all disabled:opacity-30 disabled:cursor-not-allowed hover:opacity-90"
+                  style={{
+                    background: selectedOption !== null ? 'linear-gradient(135deg, #ff6b9d 0%, #ff8fab 100%)' : '#cbd5e0',
+                    boxShadow: selectedOption !== null ? '0 8px 20px rgba(255,107,157,0.3)' : 'none',
+                  }}
+                >
+                  {currentQuestion === questions.length - 1 ? '結果を見る →' : '次へ →'}
+                </button>
               </div>
             </motion.div>
           </AnimatePresence>

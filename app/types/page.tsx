@@ -19,12 +19,6 @@ function getTypeColor(type: DiagnosisType): string {
 export default function TypesPage() {
   const router = useRouter();
 
-  const allTypes: DiagnosisType[] = [
-    'S-HE', 'S-HC', 'S-LE', 'S-LC',
-    'N-HE', 'N-HC', 'N-LE', 'N-LC',
-    'M-HE', 'M-HC', 'M-LE', 'M-LC',
-  ];
-
   const handleTypeClick = (type: DiagnosisType) => {
     router.push(`/result/${type}`);
   };

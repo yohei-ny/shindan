@@ -104,6 +104,7 @@ export default function TypesPage() {
                         <div className="absolute inset-0 flex items-center justify-center">
                           <div className="text-7xl opacity-10">🖼️</div>
                         </div>
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
                           src={`/images/${type}.png`}
                           alt={typeInfo.name}

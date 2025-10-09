@@ -127,6 +127,7 @@ export default function TypeResultPage() {
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="text-6xl opacity-20">🖼️</div>
               </div>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={`/images/${type}.png`}
                 alt={typeInfo.name}
@@ -175,7 +176,7 @@ export default function TypeResultPage() {
                         key={index}
                         className="px-5 py-2 rounded-full text-sm font-bold bg-gradient-to-r from-blue-50 to-purple-50 border-2 border-blue-200 text-gray-700"
                       >
-                        {badge}
+                        {badge.icon} {badge.text}
                       </div>
                     ))}
                   </div>

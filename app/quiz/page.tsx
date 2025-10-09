@@ -22,7 +22,6 @@ export default function QuizPage() {
     }
   }, [router]);
 
-  const progress = ((currentQuestion + 1) / questions.length) * 100;
   const question = questions[currentQuestion];
 
   const handleSelectOption = (optionIndex: number) => {
@@ -58,39 +57,6 @@ export default function QuizPage() {
         router.push(`/result/${type}`);
       }
     }, 300);
-  };
-
-  const handleNext = () => {
-    if (selectedOption === null) {
-      alert('選択肢を選んでください');
-      return;
-    }
-
-    const newAnswers = {
-      ...answers,
-      [question.id]: question.options[selectedOption].scores
-    };
-    setAnswers(newAnswers);
-
-    if (currentQuestion < questions.length - 1) {
-      setCurrentQuestion(currentQuestion + 1);
-      setSelectedOption(null);
-    } else {
-      const scores = calculateScores(newAnswers);
-      const type = determineType(scores);
-      const badges = determineBadges(scores);
-      const gender = localStorage.getItem('gender');
-
-      const result = {
-        type,
-        scores,
-        badges,
-        gender,
-        timestamp: Date.now()
-      };
-      localStorage.setItem('diagnosisResult', JSON.stringify(result));
-      router.push(`/result/${type}`);
-    }
   };
 
   const handleBack = () => {

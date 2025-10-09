@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { motion, AnimatePresence } from 'framer-motion';
 import { questions } from '@/lib/questions';
 import { calculateScores, determineType, determineBadges } from '@/lib/diagnosis';
 import { Header } from '@/components/Header';
@@ -28,6 +27,37 @@ export default function QuizPage() {
 
   const handleSelectOption = (optionIndex: number) => {
     setSelectedOption(optionIndex);
+
+    // 選択肢を記録
+    const newAnswers = {
+      ...answers,
+      [question.id]: question.options[optionIndex].scores
+    };
+    setAnswers(newAnswers);
+
+    // 少し遅延してから次の質問へ
+    setTimeout(() => {
+      if (currentQuestion < questions.length - 1) {
+        setCurrentQuestion(currentQuestion + 1);
+        setSelectedOption(null);
+      } else {
+        // 最後の質問なら結果ページへ
+        const scores = calculateScores(newAnswers);
+        const type = determineType(scores);
+        const badges = determineBadges(scores);
+        const gender = localStorage.getItem('gender');
+
+        const result = {
+          type,
+          scores,
+          badges,
+          gender,
+          timestamp: Date.now()
+        };
+        localStorage.setItem('diagnosisResult', JSON.stringify(result));
+        router.push(`/result/${type}`);
+      }
+    }, 300);
   };
 
   const handleNext = () => {
@@ -73,152 +103,78 @@ export default function QuizPage() {
   return (
     <>
       <Header />
-      <div className="min-h-screen flex flex-col items-center justify-center" style={{
-        background: 'linear-gradient(180deg, #f8f4f9 0%, #e8d5ed 50%, #d4b5dc 100%)',
-        paddingTop: '120px',
-        paddingBottom: '100px',
-      }}>
-        <div className="w-full max-w-xl mx-auto px-8">
-          {/* プログレスバー - カードの外 */}
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="mb-6"
-          >
-            <div className="flex items-center justify-between mb-3">
-              <span className="text-sm font-bold tracking-wider" style={{ color: '#4a5568' }}>
-                QUESTION
-              </span>
-              <span className="text-3xl font-black" style={{ color: '#2d3748' }}>
-                {currentQuestion + 1} <span className="text-xl font-normal" style={{ color: '#a0aec0' }}>/ {questions.length}</span>
-              </span>
+      <div className="min-h-screen bg-white pt-20 pb-16 px-4 flex items-center justify-center">
+        <div className="w-full max-w-2xl mx-auto py-8">
+          {/* プログレスバー */}
+          <div className="text-center mb-12">
+            <div className="text-xs sm:text-sm font-bold text-gray-700 mb-3 tracking-wider">QUESTION</div>
+            <div className="flex items-center justify-center gap-2 mb-4">
+              <span className="text-5xl sm:text-6xl font-bold text-gray-900">{currentQuestion + 1}</span>
+              <span className="text-2xl sm:text-3xl text-gray-400">/ {questions.length}</span>
             </div>
-            <div className="h-2 bg-white/60 rounded-full overflow-hidden" style={{ boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.08)' }}>
-              <motion.div
-                className="h-full rounded-full"
-                style={{ background: 'linear-gradient(90deg, #4a90e2 0%, #357abd 100%)' }}
-                initial={{ width: 0 }}
-                animate={{ width: `${progress}%` }}
-                transition={{ duration: 0.5, ease: 'easeOut' }}
-              />
-            </div>
-          </motion.div>
+          </div>
 
-          {/* 質問カード */}
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={currentQuestion}
-              initial={{ opacity: 0, scale: 0.98 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.98 }}
-              transition={{ duration: 0.3 }}
-              className="bg-white/95 backdrop-blur-sm rounded-[32px] relative overflow-hidden"
-              style={{
-                boxShadow: '0 20px 60px rgba(0,0,0,0.15)',
-                border: '1px solid rgba(255,255,255,0.9)'
-              }}
-            >
-              {/* カード内コンテンツ - 大きな余白 */}
-              <div className="px-8 py-12 sm:px-12 sm:py-16">
-                {/* 質問文 */}
-                <div className="mb-12 text-center">
-                  <h2 className="text-xl sm:text-2xl font-black leading-relaxed" style={{
-                    color: '#2d3748',
-                    lineHeight: '1.7'
-                  }}>
-                    {question.text}
-                  </h2>
-                </div>
+          {/* 質問文 */}
+          <h2 className="text-xl sm:text-2xl font-bold text-center mb-16 px-4 leading-relaxed" style={{ color: '#006CAC' }}>
+            {question.text}
+          </h2>
 
-                {/* 選択肢 - 余白を大きく */}
-                <div className="space-y-4 mb-10">
-                  {question.options.map((option, index) => {
-                    const isSelected = selectedOption === index;
-                    return (
-                      <motion.button
-                        key={index}
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.1 + index * 0.05 }}
-                        whileHover={{ scale: 1.01 }}
-                        whileTap={{ scale: 0.99 }}
-                        onClick={() => handleSelectOption(index)}
-                        className="w-full text-center rounded-xl py-5 px-6 transition-all relative"
-                        style={{
-                          border: isSelected ? '3px solid #4a90e2' : '1px solid #e2e8f0',
-                          boxShadow: isSelected ? '0 6px 20px rgba(74,144,226,0.25)' : 'none',
-                          background: isSelected ? '#e3f2fd' : '#fafafa'
-                        }}
-                      >
-                        <div className="text-base sm:text-lg font-bold" style={{
-                          color: isSelected ? '#1976d2' : '#2d3748'
-                        }}>
-                          {option.label}
-                        </div>
-
-                        {isSelected && (
-                          <motion.div
-                            initial={{ scale: 0, rotate: -90 }}
-                            animate={{ scale: 1, rotate: 0 }}
-                            transition={{ type: 'spring', bounce: 0.5 }}
-                            className="absolute top-5 right-5 w-7 h-7 rounded-full flex items-center justify-center"
-                            style={{ background: '#4a90e2' }}
-                          >
-                            <svg width="16" height="16" viewBox="0 0 14 14" fill="none">
-                              <path d="M11.6666 3.5L5.24998 9.91667L2.33331 7" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-                            </svg>
-                          </motion.div>
-                        )}
-                      </motion.button>
-                    );
-                  })}
-                </div>
-
-                {/* ヒント */}
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.4 }}
-                  className="text-center py-4 px-5 rounded-xl mb-8"
-                  style={{
-                    background: 'rgba(74,144,226,0.08)',
-                    color: '#4a5568'
-                  }}
-                >
-                  <span className="text-lg mr-2">💡</span>
-                  <span className="text-sm">直感で答えることをおすすめします</span>
-                </motion.div>
-              </div>
-
-              {/* ナビゲーションボタン - カードの外下部 */}
-              <div className="px-8 pb-8 flex gap-3">
-                {currentQuestion > 0 && (
-                  <button
-                    onClick={handleBack}
-                    className="px-8 py-4 rounded-xl font-bold text-sm transition-all hover:opacity-80"
-                    style={{
-                      border: '2px solid #e2e8f0',
-                      color: '#4a5568',
-                      backgroundColor: 'white',
-                    }}
-                  >
-                    ← ひとつ前に戻る
-                  </button>
-                )}
+          {/* 選択肢 */}
+          <div className="mb-12 px-4 max-w-xl mx-auto" style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(20px, 3vw, 28px)' }}>
+            {question.options.map((option, index) => {
+              const isSelected = selectedOption === index;
+              return (
                 <button
-                  onClick={handleNext}
-                  disabled={selectedOption === null}
-                  className="flex-1 px-8 py-4 rounded-xl font-bold text-base text-white transition-all disabled:opacity-30 disabled:cursor-not-allowed hover:opacity-90"
+                  key={index}
+                  onClick={() => handleSelectOption(index)}
+                  className="w-full relative group hover:scale-[1.07] transition-all duration-1000"
                   style={{
-                    background: selectedOption !== null ? 'linear-gradient(135deg, #ff6b9d 0%, #ff8fab 100%)' : '#cbd5e0',
-                    boxShadow: selectedOption !== null ? '0 8px 20px rgba(255,107,157,0.3)' : 'none',
+                    padding: '5px',
+                    borderRadius: '12px',
+                    backgroundColor: '#F7C54D',
+                    border: '1px solid #E96AB0'
                   }}
                 >
-                  {currentQuestion === questions.length - 1 ? '結果を見る →' : '次へ →'}
+                  {/* 内側ボーダー */}
+                  <div
+                    className="absolute rounded-[10px] pointer-events-none z-10 transition-all duration-1000"
+                    style={{
+                      border: '1px solid #E96AB0',
+                      inset: isSelected ? '2px' : '3px',
+                      margin: '0'
+                    }}
+                  />
+                  {/* 背景 */}
+                  <div
+                    className="absolute rounded-[10px] z-0 transition-all duration-1000"
+                    style={{
+                      backgroundColor: '#ffffff',
+                      inset: isSelected ? '2px' : '3px',
+                      margin: '0'
+                    }}
+                  />
+                  {/* テキスト */}
+                  <div className="relative z-20 text-base sm:text-lg font-medium" style={{ color: '#006CAC', margin: '0', padding: '14px 20px' }}>
+                    {option.label}
+                  </div>
                 </button>
-              </div>
-            </motion.div>
-          </AnimatePresence>
+              );
+            })}
+          </div>
+
+          {/* ナビゲーションボタン */}
+          <div className="px-4 mt-12 max-w-xl mx-auto">
+            {currentQuestion > 0 && (
+              <button
+                onClick={handleBack}
+                className="w-full px-6 py-3 text-sm sm:text-base font-medium text-white flex items-center justify-center gap-2"
+                style={{ backgroundColor: '#EDA7D1', border: '1px solid #E96AB0', borderRadius: '12px' }}
+              >
+                <span>←</span>
+                ひとつ前に戻る
+              </button>
+            )}
+          </div>
         </div>
       </div>
       <Footer />

@@ -1,59 +1,49 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { motion } from 'framer-motion';
 
 export function Header() {
   const router = useRouter();
 
   return (
-    <motion.header
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.5, ease: 'easeOut' }}
-      className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-lg shadow-sm"
-    >
-      <div className="max-w-7xl mx-auto px-5 lg:px-8 py-4">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-200">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
         <div className="flex items-center justify-between">
           {/* ロゴ */}
           <button
             onClick={() => router.push('/')}
             className="flex items-center gap-2 hover:opacity-80 transition-opacity"
           >
-            <div className="w-10 h-10 rounded-xl flex items-center justify-center text-2xl"
-                 style={{ background: 'linear-gradient(135deg, #ff6b9d 0%, #ff8fab 100%)' }}>
+            <div className="w-10 h-10 rounded-full flex items-center justify-center text-xl bg-pink-500">
               💕
             </div>
             <div>
-              <div className="text-lg font-black" style={{ color: 'var(--text-primary)' }}>
+              <div className="text-lg font-bold text-gray-900">
                 性愛タイプ診断
               </div>
-              <div className="text-xs" style={{ color: 'var(--text-muted)' }}>
+              <div className="text-xs text-gray-500">
                 SEX Type Diagnosis
               </div>
             </div>
           </button>
 
-          {/* ナビゲーション（デスクトップ） */}
-          <nav className="hidden lg:flex items-center gap-8">
+          {/* ナビゲーション */}
+          <nav className="hidden md:flex items-center gap-6">
             <button
               onClick={() => router.push('/')}
-              className="text-sm font-bold hover:opacity-70 transition-opacity"
-              style={{ color: 'var(--text-secondary)' }}
+              className="text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors"
             >
               診断をする
             </button>
             <button
               onClick={() => router.push('/types')}
-              className="text-sm font-bold hover:opacity-70 transition-opacity"
-              style={{ color: 'var(--text-secondary)' }}
+              className="text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors"
             >
               全タイプ一覧
             </button>
             <button
               onClick={() => router.push('/about')}
-              className="text-sm font-bold hover:opacity-70 transition-opacity"
-              style={{ color: 'var(--text-secondary)' }}
+              className="text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors"
             >
               診断について
             </button>
@@ -62,13 +52,12 @@ export function Header() {
           {/* CTAボタン */}
           <button
             onClick={() => router.push('/')}
-            className="px-6 py-2.5 rounded-xl text-sm font-bold text-white transition-all hover:scale-105"
-            style={{ background: 'linear-gradient(135deg, #ff6b9d 0%, #ff8fab 100%)' }}
+            className="px-5 py-2 rounded-lg text-sm font-bold text-white bg-pink-500 hover:bg-pink-600 transition-all"
           >
             診断を始める
           </button>
         </div>
       </div>
-    </motion.header>
+    </header>
   );
 }

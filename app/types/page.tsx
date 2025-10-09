@@ -1,6 +1,5 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import { DiagnosisType } from '@/types';
 import { getTypeDescription } from '@/lib/types';
@@ -9,18 +8,18 @@ import { Footer } from '@/components/Footer';
 
 function getTypeColor(type: DiagnosisType): string {
   const colors: Record<string, string> = {
-    'S-HE': '#e74c3c', 'S-HC': '#e67e22', 'S-LE': '#f39c12', 'S-LC': '#f1c40f',
-    'N-HE': '#9b59b6', 'N-HC': '#8e44ad', 'N-LE': '#3498db', 'N-LC': '#2980b9',
-    'M-HE': '#1abc9c', 'M-HC': '#16a085', 'M-LE': '#27ae60', 'M-LC': '#2ecc71',
+    'S-HE': '#ef4444', 'S-HC': '#f97316', 'S-LE': '#f59e0b', 'S-LC': '#eab308',
+    'N-HE': '#a855f7', 'N-HC': '#9333ea', 'N-LE': '#3b82f6', 'N-LC': '#2563eb',
+    'M-HE': '#14b8a6', 'M-HC': '#10b981', 'M-LE': '#22c55e', 'M-LC': '#84cc16',
   };
-  return colors[type] || '#4298b4';
+  return colors[type] || '#3b82f6';
 }
 
 function getCategoryColor(category: 'S' | 'N' | 'M'): string {
   const colors = {
-    'S': '#e74c3c',
-    'N': '#9b59b6',
-    'M': '#1abc9c',
+    'S': '#ef4444',
+    'N': '#a855f7',
+    'M': '#14b8a6',
   };
   return colors[category];
 }
@@ -56,78 +55,54 @@ export default function TypesPage() {
   return (
     <>
       <Header />
-      <div className="min-h-screen" style={{
-        background: 'linear-gradient(180deg, #f8f4f9 0%, #e8d5ed 50%, #d4b5dc 100%)',
-        paddingTop: '100px',
-        paddingBottom: '80px',
-      }}>
-        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+      <div className="min-h-screen bg-gradient-to-b from-purple-50 via-pink-50 to-purple-50 pt-24 pb-16 px-4">
+        <div className="max-w-6xl mx-auto">
           {/* ページタイトル */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-center mb-16"
-          >
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black mb-6" style={{
-              color: '#2d3748',
-              letterSpacing: '-0.02em'
-            }}>
+          <div className="text-center mb-16">
+            <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
               全12タイプ紹介
             </h1>
-            <p className="text-base sm:text-lg" style={{ color: '#4a5568' }}>
+            <p className="text-lg text-gray-600">
               あなたの性愛スタイルを見つけましょう
             </p>
-          </motion.div>
+          </div>
 
           {/* カテゴリーごとのタイプ表示 */}
-          {categories.map((category, catIndex) => (
-            <motion.div
-              key={category.key}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 + catIndex * 0.2 }}
-              className="mb-20"
-            >
+          {categories.map((category) => (
+            <div key={category.key} className="mb-20">
               {/* カテゴリーヘッダー */}
               <div className="text-center mb-10">
-                <div className="inline-block px-8 py-4 rounded-full"
+                <div className="inline-block px-10 py-4 rounded-full shadow-lg"
                      style={{
-                       background: `${getCategoryColor(category.key)}20`,
-                       border: `3px solid ${getCategoryColor(category.key)}40`
+                       backgroundColor: getCategoryColor(category.key),
+                       color: 'white'
                      }}>
-                  <span className="text-xl sm:text-2xl font-black" style={{ color: getCategoryColor(category.key) }}>
+                  <span className="text-2xl font-bold mr-3">
                     {category.name}
                   </span>
-                  <span className="text-base sm:text-lg ml-3" style={{ color: '#4a5568' }}>
+                  <span className="text-lg font-medium">
                     {category.subtitle}
                   </span>
                 </div>
               </div>
 
               {/* タイプカードグリッド */}
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
-                {category.types.map((type, index) => {
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                {category.types.map((type) => {
                   const typeInfo = getTypeDescription(type);
                   const color = getTypeColor(type);
 
                   return (
-                    <motion.div
+                    <div
                       key={type}
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ delay: 0.3 + catIndex * 0.2 + index * 0.05 }}
-                      className="bg-white rounded-3xl overflow-hidden cursor-pointer transition-all hover:-translate-y-3 hover:shadow-2xl"
-                      style={{
-                        boxShadow: '0 8px 32px rgba(0,0,0,0.12)',
-                        border: '2px solid rgba(255,255,255,0.8)'
-                      }}
+                      className="bg-white rounded-2xl overflow-hidden cursor-pointer transition-all hover:scale-105 hover:shadow-2xl shadow-lg"
                       onClick={() => handleTypeClick(type)}
                     >
                       {/* 画像エリア */}
-                      <div className="relative aspect-square bg-gradient-to-br from-gray-50 to-white overflow-hidden"
-                           style={{ borderBottom: `3px solid ${color}` }}>
+                      <div className="relative aspect-square bg-gradient-to-br from-gray-50 to-gray-100 overflow-hidden border-b-4"
+                           style={{ borderBottomColor: color }}>
                         <div className="absolute inset-0 flex items-center justify-center">
-                          <div className="text-6xl opacity-10">🖼️</div>
+                          <div className="text-7xl opacity-10">🖼️</div>
                         </div>
                         <img
                           src={`/images/${type}.png`}
@@ -147,85 +122,57 @@ export default function TypesPage() {
                       </div>
 
                       {/* テキストエリア */}
-                      <div className="p-6 lg:p-8">
+                      <div className="p-6">
                         {/* タイプコード */}
                         <div className="text-center mb-4">
-                          <div className="inline-block px-5 py-2 rounded-full text-base font-bold"
-                               style={{
-                                 background: `${color}20`,
-                                 color: color,
-                                 border: `2px solid ${color}40`
-                               }}>
+                          <div className="inline-block px-6 py-2 rounded-full text-base font-bold text-white shadow-md"
+                               style={{ backgroundColor: color }}>
                             {type}
                           </div>
                         </div>
 
                         {/* タイプ名 */}
-                        <h3 className="text-lg sm:text-xl font-black text-center mb-4" style={{
-                          color: '#2d3748',
-                          lineHeight: '1.4'
-                        }}>
+                        <h3 className="text-xl font-bold text-center mb-3 text-gray-900">
                           {typeInfo.name}
                         </h3>
 
                         {/* キャッチコピー */}
-                        <p className="text-sm sm:text-base text-center mb-6 leading-relaxed" style={{
-                          color: '#4a5568',
-                          minHeight: '3.5rem'
-                        }}>
+                        <p className="text-sm text-center mb-6 leading-relaxed text-gray-600 min-h-[3rem]">
                           {typeInfo.tagline}
                         </p>
 
                         {/* 詳しく見るボタン */}
                         <button
-                          className="w-full py-4 rounded-2xl text-base font-bold transition-all hover:scale-105"
-                          style={{
-                            background: color,
-                            color: 'white',
-                            boxShadow: `0 4px 16px ${color}40`
-                          }}
+                          className="w-full py-3 rounded-xl text-base font-bold text-white transition-all hover:scale-105 shadow-md"
+                          style={{ backgroundColor: color }}
                         >
                           詳しく見る
                         </button>
                       </div>
-                    </motion.div>
+                    </div>
                   );
                 })}
               </div>
-            </motion.div>
+            </div>
           ))}
 
           {/* CTAセクション */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.0 }}
-            className="text-center mt-20 mb-10"
-          >
-            <div className="bg-white rounded-[40px] p-12 sm:p-16"
-                 style={{
-                   boxShadow: '0 20px 60px rgba(0,0,0,0.12)',
-                   border: '2px solid rgba(255,255,255,0.8)'
-                 }}>
-              <h2 className="text-3xl sm:text-4xl font-black mb-6" style={{ color: '#2d3748' }}>
+          <div className="text-center mt-20">
+            <div className="bg-white rounded-3xl p-12 sm:p-16 shadow-2xl">
+              <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">
                 あなたはどのタイプ？
               </h2>
-              <p className="text-base sm:text-lg mb-10" style={{ color: '#4a5568' }}>
+              <p className="text-lg text-gray-600 mb-10">
                 10個の質問に答えて、あなたの性愛タイプを発見しよう
               </p>
               <button
                 onClick={() => router.push('/')}
-                className="px-16 py-6 rounded-2xl text-lg font-bold text-white transition-all hover:scale-105 active:scale-95"
-                style={{
-                  background: 'linear-gradient(135deg, #4a90e2 0%, #357abd 100%)',
-                  border: '3px solid #2d5f8d',
-                  boxShadow: '0 8px 24px rgba(74,144,226,0.4)',
-                }}
+                className="px-16 py-5 rounded-2xl text-xl font-bold text-white bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 transition-all hover:scale-105 shadow-xl"
               >
                 診断を始める →
               </button>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
       <Footer />

@@ -1,13 +1,5 @@
 import type { Metadata } from "next";
-import { Noto_Sans_JP } from "next/font/google";
 import "./globals.css";
-
-const notoSansJP = Noto_Sans_JP({
-  weight: ['400', '500', '700'],
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-noto-sans-jp',
-});
 
 export const metadata: Metadata = {
   title: "SEXタイプ診断 | あなたの性愛タイプを診断",
@@ -30,8 +22,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ja" className={notoSansJP.variable} suppressHydrationWarning>
-      <body className={`${notoSansJP.className} antialiased`} suppressHydrationWarning>
+    <html lang="ja" suppressHydrationWarning>
+      <body className="antialiased" suppressHydrationWarning>
         {children}
       </body>
     </html>

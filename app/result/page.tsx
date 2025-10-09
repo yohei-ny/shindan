@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useRouter, useParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { DiagnosisResult, DiagnosisType } from '@/types';
 import { getTypeDescription } from '@/lib/types';
 import { Header } from '@/components/Header';
@@ -16,57 +16,23 @@ function getTypeColor(type: DiagnosisType): string {
   return colors[type] || '#3b82f6';
 }
 
-// 有効なタイプかチェック
-function isValidType(type: string): type is DiagnosisType {
-  const validTypes = [
-    'S-HE', 'S-HC', 'S-LE', 'S-LC',
-    'N-HE', 'N-HC', 'N-LE', 'N-LC',
-    'M-HE', 'M-HC', 'M-LE', 'M-LC'
-  ];
-  return validTypes.includes(type);
-}
-
-export default function TypeResultPage() {
+export default function ResultPage() {
   const router = useRouter();
-  const params = useParams();
   const [result, setResult] = useState<DiagnosisResult | null>(null);
   const [copied, setCopied] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    if (typeof window !== 'undefined' && params?.type) {
-      const typeParam = typeof params.type === 'string' ? params.type : params.type[0];
-
-      if (!isValidType(typeParam)) {
-        router.push('/');
-        return;
-      }
-
-      // localStorageから結果を取得、なければダミーデータを作成
+    if (typeof window !== 'undefined') {
       const savedResult = localStorage.getItem('diagnosisResult');
       if (savedResult) {
-        const parsedResult = JSON.parse(savedResult);
-        // URLのtypeでlocalStorageのtypeを上書き
-        setResult({ ...parsedResult, type: typeParam });
+        setResult(JSON.parse(savedResult));
+        setIsLoading(false);
       } else {
-        // ダミーの結果データを作成（直リンクでアクセスされた場合）
-        setResult({
-          type: typeParam,
-          scores: {
-            L: 8,
-            E: 5,
-            B: 4,
-            ST: 3,
-            WA: 3
-          },
-          badges: [],
-          gender: 'male' as const,
-          timestamp: Date.now()
-        });
+        router.push('/');
       }
-      setIsLoading(false);
     }
-  }, [params, router]);
+  }, [router]);
 
   if (isLoading || !result) {
     return (
@@ -104,17 +70,17 @@ export default function TypeResultPage() {
   return (
     <>
       <Header />
-      <div className="min-h-screen bg-gradient-to-b from-purple-50 via-pink-50 to-purple-50 pt-40 pb-24 px-4">
+      <div className="min-h-screen bg-gradient-to-b from-purple-50 via-pink-50 to-purple-50 pt-32 pb-24 px-4">
         <div className="max-w-3xl mx-auto flex flex-col items-center">
           {/* 結果カード */}
           <div className="w-full bg-white rounded-2xl shadow-xl p-8 sm:p-12 mb-8">
             {/* タイプバッジ */}
-            <div className="text-center mb-12">
-              <div className="inline-block px-6 py-2 rounded-full text-lg font-bold shadow-md mb-4"
+            <div className="text-center mb-10">
+              <div className="inline-block px-6 py-2 rounded-full text-lg font-bold shadow-md mb-3"
                    style={{ backgroundColor: typeColor, color: 'white' }}>
                 {type}
               </div>
-              <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+              <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3">
                 {typeInfo.name}
               </h1>
               <p className="text-lg sm:text-xl text-gray-600 leading-relaxed">
@@ -123,7 +89,7 @@ export default function TypeResultPage() {
             </div>
 
             {/* イラスト画像 */}
-            <div className="relative w-full max-w-sm mx-auto aspect-square mb-10 rounded-xl overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100">
+            <div className="relative w-full max-w-sm mx-auto aspect-square mb-8 rounded-xl overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100">
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="text-6xl opacity-20">🖼️</div>
               </div>
@@ -145,21 +111,21 @@ export default function TypeResultPage() {
             </div>
 
             {/* 特徴セクション */}
-            <div className="space-y-6 mb-10">
-              <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl p-8">
-                <h2 className="text-xl font-bold text-gray-900 mb-5 flex items-center gap-2">
+            <div className="space-y-8 mb-10">
+              <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl p-6">
+                <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
                   <span>📊</span> あなたの特徴
                 </h2>
-                <p className="text-base text-gray-700 leading-relaxed" style={{ lineHeight: '2' }}>
+                <p className="text-base text-gray-700 leading-relaxed" style={{ lineHeight: '1.8' }}>
                   {typeInfo.description.manifest}
                 </p>
               </div>
 
-              <div className="bg-gradient-to-br from-pink-50 to-orange-50 rounded-xl p-8">
-                <h2 className="text-xl font-bold text-gray-900 mb-5 flex items-center gap-2">
+              <div className="bg-gradient-to-br from-pink-50 to-orange-50 rounded-xl p-6">
+                <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
                   <span>💡</span> 内面の傾向
                 </h2>
-                <p className="text-base text-gray-700 leading-relaxed" style={{ lineHeight: '2' }}>
+                <p className="text-base text-gray-700 leading-relaxed" style={{ lineHeight: '1.8' }}>
                   {typeInfo.description.latent}
                 </p>
               </div>
@@ -189,20 +155,12 @@ export default function TypeResultPage() {
               <div className="space-y-5">
                 {Object.entries(result.scores).map(([key, value]) => {
                   const labels: Record<string, string> = {
-                    L: 'リビドー',
-                    E: '新奇性',
-                    B: 'BDSM傾向',
-                    ST: '刺激重視',
-                    WA: '情緒重視',
+                    S: 'S（主導型）',
+                    M: 'M（受容型）',
+                    highFreq: '頻度重視',
+                    highIntensity: '強度重視',
                   };
-                  const maxValues: Record<string, number> = {
-                    L: 16,
-                    E: 9,
-                    B: 8,
-                    ST: 5,
-                    WA: 5,
-                  };
-                  const percentage = (value / maxValues[key]) * 100;
+                  const percentage = (value / 100) * 100;
                   return (
                     <div key={key}>
                       <div className="flex justify-between mb-2">
@@ -226,6 +184,7 @@ export default function TypeResultPage() {
 
             {/* シェアボタン */}
             <div className="text-center border-t border-gray-200 pt-8">
+              <h3 className="text-lg font-bold text-gray-900 mb-5">結果をシェアする</h3>
               <div className="flex gap-4 justify-center items-center">
                 <button
                   onClick={() => handleShare('twitter')}

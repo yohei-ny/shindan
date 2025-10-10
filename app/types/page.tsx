@@ -106,11 +106,17 @@ export default function TypesPage() {
                         </div>
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
-                          src={`/images/${type}.png`}
+                          src={`/images/${type}.jpg`}
                           alt={typeInfo.name}
                           className="w-full h-full object-cover"
                           onError={(e) => {
-                            (e.target as HTMLImageElement).style.display = 'none';
+                            const img = e.target as HTMLImageElement;
+                            // .jpgで失敗したら.pngを試す
+                            if (img.src.endsWith('.jpg')) {
+                              img.src = `/images/${type}.png`;
+                            } else {
+                              img.style.display = 'none';
+                            }
                           }}
                           onLoad={(e) => {
                             const parent = (e.target as HTMLImageElement).parentElement;

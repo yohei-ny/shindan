@@ -34,7 +34,7 @@ export default function QuizPage() {
     };
     setAnswers(newAnswers);
 
-    // 少し遅延してから次の質問へ
+    // 少し遅延してから次の質問へ（アニメーション時間を考慮）
     setTimeout(() => {
       if (currentQuestion < questions.length - 1) {
         setCurrentQuestion(currentQuestion + 1);
@@ -56,7 +56,7 @@ export default function QuizPage() {
         localStorage.setItem('diagnosisResult', JSON.stringify(result));
         router.push(`/result/${type}`);
       }
-    }, 300);
+    }, 500);
   };
 
   const handleBack = () => {
@@ -93,34 +93,44 @@ export default function QuizPage() {
                 <button
                   key={index}
                   onClick={() => handleSelectOption(index)}
-                  className="w-full relative group hover:scale-[1.07] transition-all duration-1000"
+                  className="w-full relative group hover:scale-[1.07] transition-all duration-200"
                   style={{
                     padding: '5px',
                     borderRadius: '12px',
-                    backgroundColor: '#F7C54D',
-                    border: '1px solid #E96AB0'
+                    backgroundColor: isSelected ? '#FFD966' : '#F7C54D',
+                    border: '1px solid #E96AB0',
+                    transform: isSelected ? 'scale(1.12)' : 'scale(1)',
+                    transition: 'all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)'
                   }}
                 >
                   {/* 内側ボーダー */}
                   <div
-                    className="absolute rounded-[10px] pointer-events-none z-10 transition-all duration-1000"
+                    className="absolute rounded-[10px] pointer-events-none z-10 transition-all duration-300"
                     style={{
-                      border: '1px solid #E96AB0',
+                      border: isSelected ? '2px solid #E96AB0' : '1px solid #E96AB0',
                       inset: isSelected ? '2px' : '3px',
                       margin: '0'
                     }}
                   />
                   {/* 背景 */}
                   <div
-                    className="absolute rounded-[10px] z-0 transition-all duration-1000"
+                    className="absolute rounded-[10px] z-0 transition-all duration-300"
                     style={{
-                      backgroundColor: '#ffffff',
+                      backgroundColor: isSelected ? '#FFF9E6' : '#ffffff',
                       inset: isSelected ? '2px' : '3px',
                       margin: '0'
                     }}
                   />
                   {/* テキスト */}
-                  <div className="relative z-20 text-base sm:text-lg font-medium" style={{ color: '#006CAC', margin: '0', padding: '14px 20px' }}>
+                  <div
+                    className="relative z-20 text-base sm:text-lg font-medium transition-all duration-300"
+                    style={{
+                      color: '#006CAC',
+                      margin: '0',
+                      padding: '14px 20px',
+                      fontWeight: isSelected ? 'bold' : 'medium'
+                    }}
+                  >
                     {option.label}
                   </div>
                 </button>

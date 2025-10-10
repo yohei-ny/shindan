@@ -97,7 +97,7 @@ export default function QuizPage() {
                   style={{
                     padding: '5px',
                     borderRadius: '12px',
-                    backgroundColor: isSelected ? '#FFD966' : '#F7C54D',
+                    backgroundColor: isSelected ? '#F5B800' : '#F7C54D',
                     border: '1px solid #E96AB0',
                     transform: isSelected ? 'scale(1.12)' : 'scale(1)',
                     transition: 'all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)'
@@ -116,7 +116,7 @@ export default function QuizPage() {
                   <div
                     className="absolute rounded-[10px] z-0 transition-all duration-300"
                     style={{
-                      backgroundColor: isSelected ? '#FFF9E6' : '#ffffff',
+                      backgroundColor: isSelected ? '#FFF4D1' : '#ffffff',
                       inset: isSelected ? '2px' : '3px',
                       margin: '0'
                     }}

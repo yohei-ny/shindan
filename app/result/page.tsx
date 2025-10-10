@@ -76,8 +76,8 @@ export default function ResultPage() {
           <div className="w-full bg-white rounded-2xl shadow-xl p-8 sm:p-12 mb-8">
             {/* タイプバッジ */}
             <div className="text-center mb-10">
-              <div className="inline-block px-6 py-2 rounded-full text-lg font-bold shadow-md mb-3"
-                   style={{ backgroundColor: typeColor, color: 'white' }}>
+              <div className="px-6 py-2 rounded-full font-bold shadow-md"
+                   style={{ backgroundColor: typeColor, color: 'white', marginTop: '60px', fontSize: '55px' }}>
                 {type}
               </div>
               <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3">

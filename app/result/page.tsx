@@ -70,7 +70,7 @@ export default function ResultPage() {
   return (
     <>
       <Header />
-      <div className="min-h-screen bg-gradient-to-b from-purple-50 via-pink-50 to-purple-50 pt-32 pb-24 px-4">
+      <div className="min-h-screen bg-gradient-to-b from-purple-50 via-pink-50 to-purple-50 pt-24 sm:pt-32 md:pt-40 pb-24 px-4">
         <div className="max-w-3xl mx-auto flex flex-col items-center">
           {/* 結果カード */}
           <div className="w-full bg-white rounded-2xl shadow-xl p-8 sm:p-12 mb-8">

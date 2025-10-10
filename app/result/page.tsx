@@ -113,20 +113,20 @@ export default function ResultPage() {
 
             {/* 特徴セクション */}
             <div className="space-y-8 mb-10">
-              <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl p-6">
+              <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl" style={{ padding: '15px', margin: '10px' }}>
                 <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
                   <span>📊</span> あなたの特徴
                 </h2>
-                <p className="text-base text-gray-700 leading-relaxed" style={{ lineHeight: '1.8' }}>
+                <p className="text-base text-gray-700 leading-relaxed" style={{ lineHeight: '2' }}>
                   {typeInfo.description.manifest}
                 </p>
               </div>
 
-              <div className="bg-gradient-to-br from-pink-50 to-orange-50 rounded-xl p-6">
+              <div className="bg-gradient-to-br from-pink-50 to-orange-50 rounded-xl" style={{ padding: '15px', margin: '10px' }}>
                 <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
                   <span>💡</span> 内面の傾向
                 </h2>
-                <p className="text-base text-gray-700 leading-relaxed" style={{ lineHeight: '1.8' }}>
+                <p className="text-base text-gray-700 leading-relaxed" style={{ lineHeight: '2' }}>
                   {typeInfo.description.latent}
                 </p>
               </div>

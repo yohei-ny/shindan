@@ -109,15 +109,15 @@ export default function TypeResultPage() {
           {/* 結果カード */}
           <div className="w-full bg-white rounded-2xl shadow-xl p-8 sm:p-12 mb-8">
             {/* タイプバッジ */}
-            <div className="text-center mb-12">
-              <div className="px-6 py-2 rounded-full font-bold shadow-md"
-                   style={{ backgroundColor: typeColor, color: 'white', marginTop: '60px', fontSize: '55px' }}>
-                {type}
-              </div>
-              <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+            <div className="text-center mb-12" style={{ marginTop: '60px' }}>
+              <h1 className="font-bold text-gray-900 mb-4" style={{ fontSize: 'clamp(28px, 6vw, 36px)', whiteSpace: 'nowrap' }}>
                 {typeInfo.name}
               </h1>
-              <p className="text-lg sm:text-xl text-gray-600 leading-relaxed">
+              <div className="px-6 py-2 rounded-full font-bold shadow-md"
+                   style={{ backgroundColor: typeColor, color: 'white', fontSize: '55px' }}>
+                {type}
+              </div>
+              <p className="text-lg sm:text-xl text-gray-600 leading-relaxed mt-4">
                 {typeInfo.tagline}
               </p>
             </div>

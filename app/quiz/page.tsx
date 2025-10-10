@@ -71,7 +71,7 @@ export default function QuizPage() {
       <Header />
       <div className="min-h-screen pt-20 pb-16 px-4 flex items-center justify-center"
            style={{
-             background: 'linear-gradient(to bottom, #1a0a2e 0%, #2d1b4e 30%, #4a1942 60%, #6b1f3d 100%)'
+             background: 'linear-gradient(to bottom, #8b2e8f 0%, #c2185b 40%, #e91e63 70%, #f06292 100%)'
            }}>
         <div className="w-full max-w-2xl mx-auto py-8">
           {/* プログレスバー */}

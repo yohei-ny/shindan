@@ -71,7 +71,7 @@ export default function TypesPage() {
           {categories.map((category) => (
             <div key={category.key} className="mb-20">
               {/* カテゴリーヘッダー */}
-              <div className="text-center mb-10">
+              <div className="text-center mb-10" style={{ padding: '40px 0 15px 0' }}>
                 <div className="inline-block px-10 py-4 rounded-full shadow-lg"
                      style={{
                        backgroundColor: getCategoryColor(category.key),

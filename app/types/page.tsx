@@ -55,8 +55,8 @@ export default function TypesPage() {
   return (
     <>
       <Header />
-      <div className="min-h-screen bg-gradient-to-b from-purple-50 via-pink-50 to-purple-50 pt-28 sm:pt-32 md:pt-36 pb-16 px-4">
-        <div className="max-w-6xl mx-auto">
+      <div className="min-h-screen bg-gradient-to-b from-purple-50 via-pink-50 to-purple-50 pt-28 sm:pt-32 md:pt-36 pb-16 px-4 flex justify-center">
+        <div className="max-w-6xl w-full">
           {/* ページタイトル */}
           <div className="text-center mb-16">
             <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">

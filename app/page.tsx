@@ -76,11 +76,17 @@ export default function Home() {
           </div>
           <button
             onClick={() => setShowGenderModal(true)}
-            className="w-20 h-20 rounded-full bg-gradient-to-br from-blue-400 to-purple-600 flex items-center justify-center hover:opacity-90 transition-opacity flex-shrink-0"
+            className="relative w-20 h-20 rounded-full flex items-center justify-center hover:opacity-90 transition-opacity flex-shrink-0 overflow-hidden"
           >
-            <div className="text-center">
-              <div className="text-white text-xs font-bold">診断</div>
-              <div className="text-white text-xs font-bold">START</div>
+            <Image
+              src="/img/btn.png"
+              alt=""
+              fill
+              className="object-cover"
+            />
+            <div className="relative z-10 text-center">
+              <div className="text-white text-xs font-bold drop-shadow-lg">診断</div>
+              <div className="text-white text-xs font-bold drop-shadow-lg">START</div>
             </div>
           </button>
         </div>

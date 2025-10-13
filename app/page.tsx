@@ -3,8 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Gender } from '@/types';
-import { Header } from '@/components/Header';
-import { Footer } from '@/components/Footer';
+import Image from 'next/image';
 
 export default function Home() {
   const router = useRouter();
@@ -21,47 +20,55 @@ export default function Home() {
   };
 
   return (
-    <>
-      <Header />
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center pt-20 pb-12 px-4">
-        <div className="max-w-2xl w-full">
-          {/* メインカード */}
-          <div className="bg-white rounded-2xl shadow-sm p-10 sm:p-14 text-center">
-            {/* アイコン */}
-            <div className="inline-flex items-center justify-center w-20 h-20 rounded-full mb-6 bg-pink-500">
-              <span className="text-4xl">💕</span>
-            </div>
+    <div className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden bg-black">
+      {/* 背景画像 */}
+      <div className="absolute inset-0">
+        <Image
+          src="/img/top.png"
+          alt="性愛診断"
+          fill
+          className="object-cover"
+          priority
+        />
+      </div>
 
-            {/* タイトル */}
-            <div className="mb-6">
-              <p className="text-sm text-gray-600 mb-2">
-                10個の質問に答えて、
-              </p>
-              <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3 leading-tight">
-                あなたの秘めた<br />
-                「性愛タイプ」を見つけよう！
-              </h1>
-            </div>
+      {/* コンテンツエリア */}
+      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen w-full px-4 py-8">
+        {/* タイトル */}
+        <div className="text-center mb-8">
+          <h1 className="text-5xl sm:text-6xl font-bold text-white mb-4 drop-shadow-lg">
+            性愛診断
+          </h1>
+          <p className="text-xl sm:text-2xl text-white drop-shadow-md">
+            あなたの性愛スタイルを見つける
+          </p>
+        </div>
 
-            {/* サブタイトル */}
-            <div className="inline-block px-6 py-2 rounded-full mb-8 bg-pink-100">
-              <span className="text-base font-bold text-pink-600">
-                あなたの性愛スタイルは？
-              </span>
-            </div>
+        {/* 診断スタートボタン */}
+        <div className="mb-16">
+          <button
+            onClick={() => setShowGenderModal(true)}
+            className="relative block hover:opacity-90 transition-opacity"
+          >
+            <Image
+              src="/img/btn.png"
+              alt="診断スタート"
+              width={300}
+              height={100}
+              className="w-auto h-auto"
+            />
+          </button>
+        </div>
 
-            {/* STARTボタン */}
-            <button
-              onClick={() => setShowGenderModal(true)}
-              className="w-full max-w-xs px-12 py-4 rounded-lg font-bold text-white text-xl bg-blue-500 hover:bg-blue-600 transition-all"
-            >
-              START
-            </button>
-
-            {/* 説明テキスト */}
-            <p className="text-xs text-gray-500 mt-6">
-              ※ 所要時間: 約3分 / 完全匿名・個人情報不要
-            </p>
+        {/* フッターリンク */}
+        <div className="mt-auto flex flex-col items-center gap-4 text-white">
+          <div className="flex gap-6 text-sm">
+            <a href="/terms" className="hover:underline drop-shadow-md">
+              用語解説・全タイプ一覧
+            </a>
+            <a href="/privacy" className="hover:underline drop-shadow-md">
+              プライバシーポリシー
+            </a>
           </div>
         </div>
       </div>
@@ -128,7 +135,6 @@ export default function Home() {
           </div>
         </div>
       )}
-      <Footer />
-    </>
+    </div>
   );
 }

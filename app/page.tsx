@@ -50,9 +50,15 @@ export default function Home() {
         {/* 診断スタートボタン */}
         <button
           onClick={() => setShowGenderModal(true)}
-          className="w-full max-w-md bg-white rounded-full py-4 px-8 mb-8 hover:bg-gray-100 transition-colors"
+          className="relative w-full max-w-md rounded-full py-4 px-8 mb-8 overflow-hidden hover:opacity-90 transition-opacity"
         >
-          <span className="text-black text-lg font-bold">診断スタート</span>
+          <Image
+            src="/img/btn.png"
+            alt=""
+            fill
+            className="object-cover"
+          />
+          <span className="relative z-10 text-white text-lg font-bold drop-shadow-lg">診断スタート</span>
         </button>
 
         {/* 区切り線 */}

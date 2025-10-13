@@ -161,20 +161,20 @@ export default function TypeResultPage() {
 
           {/* 特徴セクション */}
           <div className="w-full" style={{ marginBottom: '32px' }}>
-            <div className="bg-gray-900 rounded-xl" style={{ padding: '24px', marginBottom: '16px' }}>
-              <h2 className="text-lg font-bold text-white flex items-center gap-2" style={{ marginBottom: '16px' }}>
+            <div className="bg-white rounded-xl" style={{ padding: '24px', marginBottom: '16px' }}>
+              <h2 className="text-lg font-bold text-gray-900 flex items-center gap-2" style={{ marginBottom: '16px' }}>
                 あなたの特徴
               </h2>
-              <p className="text-sm text-gray-300 leading-relaxed" style={{ lineHeight: '1.8' }}>
+              <p className="text-sm text-gray-700 leading-relaxed" style={{ lineHeight: '1.8' }}>
                 {typeInfo.description.manifest}
               </p>
             </div>
 
-            <div className="bg-gray-900 rounded-xl" style={{ padding: '24px' }}>
-              <h2 className="text-lg font-bold text-white flex items-center gap-2" style={{ marginBottom: '16px' }}>
+            <div className="bg-white rounded-xl" style={{ padding: '24px' }}>
+              <h2 className="text-lg font-bold text-gray-900 flex items-center gap-2" style={{ marginBottom: '16px' }}>
                 {typeInfo.name}の詳細
               </h2>
-              <p className="text-sm text-gray-300 leading-relaxed" style={{ lineHeight: '1.8' }}>
+              <p className="text-sm text-gray-700 leading-relaxed" style={{ lineHeight: '1.8' }}>
                 {typeInfo.description.latent}
               </p>
             </div>

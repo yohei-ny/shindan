@@ -64,8 +64,8 @@ export default function TypesPage() {
       </header>
 
       {/* メインコンテンツ */}
-      <main className="flex-1" style={{ paddingLeft: '24px', paddingRight: '24px', paddingBottom: '48px' }}>
-        <div className="max-w-md mx-auto">
+      <main className="flex-1 flex justify-center" style={{ paddingLeft: '24px', paddingRight: '24px', paddingBottom: '48px' }}>
+        <div className="w-full max-w-2xl">
           {/* 用語解説タイトル */}
           <div className="text-center" style={{ marginTop: '32px', marginBottom: '24px' }}>
             <h2 className="text-white text-lg font-bold">用語解説</h2>
@@ -77,7 +77,7 @@ export default function TypesPage() {
           </div>
 
           {/* タイプカード */}
-          <div className="space-y-4">
+          <div className="grid grid-cols-2 gap-4">
             {categories.flatMap((category) => category.types).map((type) => {
               const typeInfo = getTypeDescription(type);
               const category = getTypeCategory(type);
@@ -90,9 +90,9 @@ export default function TypesPage() {
                   onClick={() => handleTypeClick(type)}
                 >
                   {/* 画像エリア */}
-                  <div className="relative aspect-video bg-gray-800 overflow-hidden">
+                  <div className="relative aspect-square bg-gray-800 overflow-hidden">
                     <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="text-6xl opacity-20">🖼️</div>
+                      <div className="text-4xl opacity-20">🖼️</div>
                     </div>
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
@@ -118,27 +118,27 @@ export default function TypesPage() {
                   </div>
 
                   {/* コンテンツエリア */}
-                  <div style={{ padding: '16px' }}>
+                  <div style={{ padding: '12px' }}>
                     {/* タイプバッジ */}
-                    <div style={{ marginBottom: '12px' }}>
-                      <div className="inline-block px-4 py-1 rounded text-sm font-bold text-white" style={{ backgroundColor: categoryColor }}>
+                    <div style={{ marginBottom: '8px' }}>
+                      <div className="inline-block px-3 py-1 rounded text-xs font-bold text-white" style={{ backgroundColor: categoryColor }}>
                         {type}
                       </div>
                     </div>
 
                     {/* タイプ名 */}
-                    <h3 className="text-lg font-bold text-gray-900" style={{ marginBottom: '8px' }}>
+                    <h3 className="text-sm font-bold text-gray-900" style={{ marginBottom: '6px' }}>
                       {typeInfo.name}
                     </h3>
 
                     {/* 説明文 */}
-                    <p className="text-sm text-gray-600 leading-relaxed" style={{ marginBottom: '16px' }}>
+                    <p className="text-xs text-gray-600 leading-relaxed" style={{ marginBottom: '12px', minHeight: '2.5rem' }}>
                       {typeInfo.tagline}
                     </p>
 
                     {/* 詳しく見るボタン */}
                     <button
-                      className="w-full py-2 rounded text-sm font-bold text-white transition-all hover:opacity-90"
+                      className="w-full py-2 rounded text-xs font-bold text-white transition-all hover:opacity-90"
                       style={{ backgroundColor: categoryColor }}
                     >
                       詳しく見る

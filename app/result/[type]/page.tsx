@@ -183,7 +183,7 @@ export default function TypeResultPage() {
           {/* スコア詳細 */}
           <div className="w-full bg-gray-900 rounded-xl" style={{ padding: '24px', marginBottom: '32px' }}>
             <h2 className="text-lg font-bold text-white" style={{ marginBottom: '24px' }}>✅スコア詳細</h2>
-            <div className="space-y-3">
+            <div className="space-y-4">
               {Object.entries(result.scores).map(([key, value]) => {
                 const labels: Record<string, string> = {
                   L: 'リビドー',
@@ -199,10 +199,22 @@ export default function TypeResultPage() {
                   ST: 5,
                   WA: 5,
                 };
+                const percentage = (value / maxValues[key]) * 100;
                 return (
-                  <div key={key} className="flex justify-between py-2 border-b border-gray-700">
-                    <span className="text-sm text-gray-300">{labels[key]}</span>
-                    <span className="text-sm font-bold text-white">{value}</span>
+                  <div key={key}>
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="text-sm text-gray-300">{labels[key]}</span>
+                      <span className="text-sm font-bold text-white">{value} / {maxValues[key]}</span>
+                    </div>
+                    <div className="w-full bg-gray-700 rounded-full h-2 overflow-hidden">
+                      <div
+                        className="h-full rounded-full transition-all duration-500"
+                        style={{
+                          width: `${percentage}%`,
+                          backgroundColor: typeColor
+                        }}
+                      />
+                    </div>
                   </div>
                 );
               })}

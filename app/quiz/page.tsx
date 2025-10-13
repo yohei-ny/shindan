@@ -4,8 +4,6 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { questions } from '@/lib/questions';
 import { calculateScores, determineType, determineBadges } from '@/lib/diagnosis';
-import { Header } from '@/components/Header';
-import { Footer } from '@/components/Footer';
 
 export default function QuizPage() {
   const router = useRouter();
@@ -67,13 +65,17 @@ export default function QuizPage() {
   };
 
   return (
-    <>
-      <Header />
-      <div className="min-h-screen pt-20 pb-16 px-4 flex items-center justify-center"
-           style={{
-             background: 'linear-gradient(to bottom, #1e5a9e 0%, #2b6cb0 30%, #d946a6 60%, #ec4899 85%, #f9a8d4 100%)'
-           }}>
-        <div className="w-full max-w-2xl mx-auto py-8">
+    <div className="min-h-screen flex flex-col bg-black">
+      {/* ヘッダー */}
+      <header className="flex items-center justify-between px-6 py-4 bg-black">
+        <div className="text-2xl">🔥</div>
+        <h1 className="text-xl font-bold text-[#D4AF77] tracking-wider">性愛診断</h1>
+        <div className="text-2xl">🎁</div>
+      </header>
+
+      {/* メインコンテンツ */}
+      <div className="flex-1 flex items-center justify-center px-4 py-8">
+        <div className="w-full max-w-2xl mx-auto">
           {/* プログレスバー */}
           <div className="text-center mb-12">
             <div className="text-xs sm:text-sm font-bold mb-3 tracking-wider" style={{ color: '#cbd5e0' }}>QUESTION</div>
@@ -100,48 +102,25 @@ export default function QuizPage() {
           </h2>
 
           {/* 選択肢 */}
-          <div className="mb-12 px-4 max-w-xl mx-auto" style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(20px, 3vw, 28px)' }}>
+          <div className="mb-12 px-4 max-w-xl mx-auto space-y-4">
             {question.options.map((option, index) => {
               const isSelected = selectedOption === index;
               return (
                 <button
                   key={index}
                   onClick={() => handleSelectOption(index)}
-                  className="w-full relative group hover:scale-[1.07] transition-all duration-200"
+                  className="w-full rounded-xl hover:opacity-90 transition-all duration-200"
                   style={{
-                    padding: '5px',
-                    borderRadius: '12px',
-                    backgroundColor: isSelected ? '#F5B800' : '#EEC6E2',
-                    border: '1px solid #E96AB0',
-                    transform: isSelected ? 'scale(1.12)' : 'scale(1)',
-                    transition: 'all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)'
+                    backgroundColor: isSelected ? '#3b82f6' : '#1f2937',
+                    padding: '16px 20px',
+                    border: isSelected ? '2px solid #60a5fa' : '1px solid #374151',
+                    transform: isSelected ? 'scale(1.02)' : 'scale(1)'
                   }}
                 >
-                  {/* 内側ボーダー */}
                   <div
-                    className="absolute rounded-[10px] pointer-events-none z-10 transition-all duration-300"
+                    className="text-base sm:text-lg font-medium"
                     style={{
-                      border: isSelected ? '2px solid #E96AB0' : '1px solid #E96AB0',
-                      inset: isSelected ? '2px' : '3px',
-                      margin: '0'
-                    }}
-                  />
-                  {/* 背景 */}
-                  <div
-                    className="absolute rounded-[10px] z-0 transition-all duration-300"
-                    style={{
-                      backgroundColor: isSelected ? '#FFF4D1' : '#ffffff',
-                      inset: isSelected ? '2px' : '3px',
-                      margin: '0'
-                    }}
-                  />
-                  {/* テキスト */}
-                  <div
-                    className="relative z-20 text-base sm:text-lg font-medium transition-all duration-300"
-                    style={{
-                      color: '#006CAC',
-                      margin: '0',
-                      padding: '14px 20px',
+                      color: isSelected ? '#ffffff' : '#d1d5db',
                       fontWeight: isSelected ? 'bold' : 'medium'
                     }}
                   >
@@ -157,8 +136,8 @@ export default function QuizPage() {
             {currentQuestion > 0 && (
               <button
                 onClick={handleBack}
-                className="w-full px-6 py-3 text-sm sm:text-base font-medium text-white flex items-center justify-center gap-2"
-                style={{ backgroundColor: '#EDA7D1', border: '1px solid #E96AB0', borderRadius: '12px' }}
+                className="w-full px-6 py-3 text-sm sm:text-base font-medium text-white flex items-center justify-center gap-2 rounded-xl hover:opacity-80 transition-opacity"
+                style={{ backgroundColor: '#374151', border: '1px solid #4b5563' }}
               >
                 <span>←</span>
                 ひとつ前に戻る
@@ -167,7 +146,6 @@ export default function QuizPage() {
           </div>
         </div>
       </div>
-      <Footer />
-    </>
+    </div>
   );
 }

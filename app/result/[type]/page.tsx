@@ -163,7 +163,7 @@ export default function TypeResultPage() {
           <div className="w-full" style={{ marginBottom: '32px' }}>
             <div className="bg-white rounded-xl" style={{ padding: '24px', marginBottom: '16px' }}>
               <h2 className="text-lg font-bold text-gray-900 flex items-center gap-2" style={{ marginBottom: '16px' }}>
-                あなたの特徴
+                🎯あなたの特徴
               </h2>
               <p className="text-sm text-gray-700 leading-relaxed" style={{ lineHeight: '1.8' }}>
                 {typeInfo.description.manifest}
@@ -172,7 +172,7 @@ export default function TypeResultPage() {
 
             <div className="bg-white rounded-xl" style={{ padding: '24px' }}>
               <h2 className="text-lg font-bold text-gray-900 flex items-center gap-2" style={{ marginBottom: '16px' }}>
-                {typeInfo.name}の詳細
+                ♡内面の傾向
               </h2>
               <p className="text-sm text-gray-700 leading-relaxed" style={{ lineHeight: '1.8' }}>
                 {typeInfo.description.latent}
@@ -182,7 +182,7 @@ export default function TypeResultPage() {
 
           {/* スコア詳細 */}
           <div className="w-full bg-gray-900 rounded-xl" style={{ padding: '24px', marginBottom: '32px' }}>
-            <h2 className="text-lg font-bold text-white" style={{ marginBottom: '24px' }}>スコア詳細</h2>
+            <h2 className="text-lg font-bold text-white" style={{ marginBottom: '24px' }}>✅スコア詳細</h2>
             <div className="space-y-3">
               {Object.entries(result.scores).map(([key, value]) => {
                 const labels: Record<string, string> = {

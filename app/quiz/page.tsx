@@ -65,9 +65,9 @@ export default function QuizPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-black">
+    <div className="min-h-screen flex flex-col" style={{ backgroundColor: '#0a0a0a' }}>
       {/* ヘッダー */}
-      <header className="flex items-center justify-between px-6 py-4 bg-black">
+      <header className="flex items-center justify-between px-6 py-4" style={{ backgroundColor: '#0a0a0a' }}>
         <div className="text-2xl">🔥</div>
         <h1 className="text-xl font-bold text-[#D4AF77] tracking-wider">性愛診断</h1>
         <div className="text-2xl">🎁</div>

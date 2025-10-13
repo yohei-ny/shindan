@@ -131,9 +131,6 @@ export default function TypeResultPage() {
             {typeInfo.tagline}
           </p>
 
-          {/* 結果カード */}
-          <div className="w-full bg-black rounded-2xl" style={{ marginBottom: '32px' }}>
-
           {/* イラスト画像 */}
           <div className="relative w-full aspect-square rounded-xl overflow-hidden" style={{ marginBottom: '32px' }}>
             <div className="absolute inset-0 flex items-center justify-center bg-gray-800">

@@ -29,9 +29,9 @@ export default function Home() {
       </header>
 
       {/* メインコンテンツ */}
-      <main className="flex-1 flex flex-col items-center px-6 pb-8">
+      <main className="flex-1 flex flex-col items-center px-6 pb-12">
         {/* メイン画像 */}
-        <div className="w-full max-w-md mb-8 mt-8">
+        <div className="w-full max-w-md mb-12 mt-10">
           <Image
             src="/img/top.png"
             alt="性愛診断"
@@ -43,20 +43,20 @@ export default function Home() {
         </div>
 
         {/* キャッチコピー */}
-        <p className="text-white text-center text-base mb-10 tracking-wide">
+        <p className="text-white text-center text-base mb-12 tracking-wide">
           あなたの性愛スタイルを見つける
         </p>
 
         {/* 診断スタートボタン */}
         <button
           onClick={() => setShowGenderModal(true)}
-          className="w-full max-w-md bg-white rounded-full py-5 px-8 mb-12 hover:bg-gray-100 transition-colors"
+          className="w-full max-w-md bg-white rounded-full py-5 px-8 mb-16 hover:bg-gray-100 transition-colors"
         >
           <span className="text-black text-lg font-bold">診断スタート</span>
         </button>
 
         {/* 区切り線 */}
-        <div className="w-full max-w-md border-t border-gray-700 mb-10"></div>
+        <div className="w-full max-w-md border-t border-gray-700 mb-12"></div>
 
         {/* フッター */}
         <div className="w-full max-w-md flex items-center justify-between">

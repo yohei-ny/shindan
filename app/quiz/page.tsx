@@ -109,18 +109,21 @@ export default function QuizPage() {
                 <button
                   key={index}
                   onClick={() => handleSelectOption(index)}
-                  className="w-full rounded-xl hover:opacity-90 transition-all duration-200"
+                  className="w-full rounded-xl hover:opacity-90 transition-all duration-300"
                   style={{
-                    backgroundColor: isSelected ? '#3b82f6' : '#1f2937',
-                    padding: '16px 20px',
-                    border: isSelected ? '2px solid #60a5fa' : '1px solid #374151',
-                    transform: isSelected ? 'scale(1.02)' : 'scale(1)'
+                    background: isSelected
+                      ? 'linear-gradient(135deg, #ec4899 0%, #a855f7 100%)'
+                      : 'linear-gradient(135deg, #1f1f1f 0%, #2d2d2d 100%)',
+                    padding: '18px 24px',
+                    border: isSelected ? '2px solid #f472b6' : '1px solid #4a4a4a',
+                    transform: isSelected ? 'scale(1.03)' : 'scale(1)',
+                    boxShadow: isSelected ? '0 8px 24px rgba(236, 72, 153, 0.3)' : 'none'
                   }}
                 >
                   <div
                     className="text-base sm:text-lg font-medium"
                     style={{
-                      color: isSelected ? '#ffffff' : '#d1d5db',
+                      color: isSelected ? '#ffffff' : '#e5e5e5',
                       fontWeight: isSelected ? 'bold' : 'medium'
                     }}
                   >
@@ -136,8 +139,11 @@ export default function QuizPage() {
             {currentQuestion > 0 && (
               <button
                 onClick={handleBack}
-                className="w-full px-6 py-3 text-sm sm:text-base font-medium text-white flex items-center justify-center gap-2 rounded-xl hover:opacity-80 transition-opacity"
-                style={{ backgroundColor: '#374151', border: '1px solid #4b5563' }}
+                className="w-full px-6 py-3 text-sm sm:text-base font-medium text-white flex items-center justify-center gap-2 rounded-xl hover:opacity-80 transition-all"
+                style={{
+                  background: 'linear-gradient(135deg, #4a4a4a 0%, #2d2d2d 100%)',
+                  border: '1px solid #6b6b6b'
+                }}
               >
                 <span>←</span>
                 ひとつ前に戻る

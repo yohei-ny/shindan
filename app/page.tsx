@@ -31,7 +31,7 @@ export default function Home() {
       {/* メインコンテンツ */}
       <main className="flex-1 flex flex-col items-center" style={{ paddingLeft: '24px', paddingRight: '24px', paddingBottom: '48px' }}>
         {/* メイン画像 */}
-        <div className="w-full max-w-md" style={{ marginTop: '48px', marginBottom: '40px' }}>
+        <div className="w-full max-w-md" style={{ marginBottom: '40px' }}>
           <Image
             src="/img/top.png"
             alt="性愛診断"
@@ -51,7 +51,7 @@ export default function Home() {
         <button
           onClick={() => setShowGenderModal(true)}
           className="w-full max-w-md bg-white rounded-full hover:bg-gray-100 transition-colors"
-          style={{ padding: '20px 32px', marginBottom: '60px' }}
+          style={{ padding: '20px 32px' }}
         >
           <span className="text-black text-lg font-bold">診断スタート</span>
         </button>

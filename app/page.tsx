@@ -20,62 +20,69 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden bg-black">
-      {/* 背景画像 */}
-      <div className="absolute inset-0">
-        <Image
-          src="/img/top.png"
-          alt="性愛診断"
-          fill
-          className="object-cover"
-          priority
-        />
-      </div>
+    <div className="min-h-screen flex flex-col bg-black">
+      {/* ヘッダー */}
+      <header className="flex items-center justify-between px-6 py-4 bg-black">
+        <div className="text-2xl">🔥</div>
+        <h1 className="text-xl font-bold text-[#D4AF77] tracking-wider">性愛診断</h1>
+        <div className="text-2xl">🎁</div>
+      </header>
 
-      {/* コンテンツエリア */}
-      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen w-full px-4 py-8">
-        {/* タイトル */}
-        <div className="text-center mb-8">
-          <h1 className="text-5xl sm:text-6xl font-bold text-white mb-4 drop-shadow-lg">
-            性愛診断
-          </h1>
-          <p className="text-xl sm:text-2xl text-white drop-shadow-md">
-            あなたの性愛スタイルを見つける
-          </p>
+      {/* メインコンテンツ */}
+      <main className="flex-1 flex flex-col items-center px-6 pb-8">
+        {/* メイン画像 */}
+        <div className="w-full max-w-md mb-6 mt-4">
+          <Image
+            src="/img/top.png"
+            alt="性愛診断"
+            width={500}
+            height={500}
+            className="w-full h-auto rounded-lg"
+            priority
+          />
         </div>
+
+        {/* キャッチコピー */}
+        <p className="text-white text-center text-base mb-8 tracking-wide">
+          あなたの性愛スタイルを見つける
+        </p>
 
         {/* 診断スタートボタン */}
-        <div className="mb-16">
-          <button
-            onClick={() => setShowGenderModal(true)}
-            className="relative block hover:opacity-90 transition-opacity"
-          >
-            <Image
-              src="/img/btn.png"
-              alt="診断スタート"
-              width={300}
-              height={100}
-              className="w-auto h-auto"
-            />
-          </button>
-        </div>
+        <button
+          onClick={() => setShowGenderModal(true)}
+          className="w-full max-w-md bg-white rounded-full py-4 px-8 mb-8 hover:bg-gray-100 transition-colors"
+        >
+          <span className="text-black text-lg font-bold">診断スタート</span>
+        </button>
 
-        {/* フッターリンク */}
-        <div className="mt-auto flex flex-col items-center gap-4 text-white">
-          <div className="flex gap-6 text-sm">
-            <a href="/terms" className="hover:underline drop-shadow-md">
+        {/* 区切り線 */}
+        <div className="w-full max-w-md border-t border-gray-700 mb-6"></div>
+
+        {/* フッター */}
+        <div className="w-full max-w-md flex items-center justify-between">
+          <div className="flex flex-col gap-2 text-white text-sm">
+            <a href="/terms" className="hover:text-gray-300 transition-colors">
               用語解説・全タイプ一覧
             </a>
-            <a href="/privacy" className="hover:underline drop-shadow-md">
+            <a href="/privacy" className="hover:text-gray-300 transition-colors">
               プライバシーポリシー
             </a>
           </div>
+          <button
+            onClick={() => setShowGenderModal(true)}
+            className="w-20 h-20 rounded-full bg-gradient-to-br from-blue-400 to-purple-600 flex items-center justify-center hover:opacity-90 transition-opacity flex-shrink-0"
+          >
+            <div className="text-center">
+              <div className="text-white text-xs font-bold">診断</div>
+              <div className="text-white text-xs font-bold">START</div>
+            </div>
+          </button>
         </div>
-      </div>
+      </main>
 
       {/* 性別選択モーダル */}
       {showGenderModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70">
           <div
             className="absolute inset-0"
             onClick={() => setShowGenderModal(false)}

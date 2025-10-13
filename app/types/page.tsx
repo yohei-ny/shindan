@@ -77,76 +77,89 @@ export default function TypesPage() {
           </div>
 
           {/* タイプカード */}
-          <div className="grid grid-cols-2 gap-4">
-            {categories.flatMap((category) => category.types).map((type) => {
-              const typeInfo = getTypeDescription(type);
-              const category = getTypeCategory(type);
-              const categoryColor = getCategoryColor(category);
-
-              return (
-                <div
-                  key={type}
-                  className="bg-white rounded-xl overflow-hidden cursor-pointer"
-                  onClick={() => handleTypeClick(type)}
-                >
-                  {/* 画像エリア */}
-                  <div className="relative aspect-square bg-gray-800 overflow-hidden">
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="text-4xl opacity-20">🖼️</div>
-                    </div>
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={`/images/${type}.jpg`}
-                      alt={typeInfo.name}
-                      className="w-full h-full object-cover"
-                      onError={(e) => {
-                        const img = e.target as HTMLImageElement;
-                        if (img.src.endsWith('.jpg')) {
-                          img.src = `/images/${type}.png`;
-                        } else {
-                          img.style.display = 'none';
-                        }
-                      }}
-                      onLoad={(e) => {
-                        const parent = (e.target as HTMLImageElement).parentElement;
-                        if (parent) {
-                          const placeholder = parent.querySelector('.absolute');
-                          if (placeholder) (placeholder as HTMLElement).style.display = 'none';
-                        }
-                      }}
-                    />
-                  </div>
-
-                  {/* コンテンツエリア */}
-                  <div style={{ padding: '12px' }}>
-                    {/* タイプバッジ */}
-                    <div style={{ marginBottom: '8px' }}>
-                      <div className="inline-block px-3 py-1 rounded text-xs font-bold text-white" style={{ backgroundColor: categoryColor }}>
-                        {type}
-                      </div>
-                    </div>
-
-                    {/* タイプ名 */}
-                    <h3 className="text-sm font-bold text-gray-900" style={{ marginBottom: '6px' }}>
-                      {typeInfo.name}
-                    </h3>
-
-                    {/* 説明文 */}
-                    <p className="text-xs text-gray-600 leading-relaxed" style={{ marginBottom: '12px', minHeight: '2.5rem' }}>
-                      {typeInfo.tagline}
-                    </p>
-
-                    {/* 詳しく見るボタン */}
-                    <button
-                      className="w-full py-2 rounded text-xs font-bold text-white transition-all hover:opacity-90"
-                      style={{ backgroundColor: categoryColor }}
-                    >
-                      詳しく見る
-                    </button>
+          <div>
+            {categories.map((category) => (
+              <div key={category.key} style={{ marginBottom: '32px' }}>
+                {/* カテゴリーヘッダー */}
+                <div className="text-center" style={{ marginBottom: '16px' }}>
+                  <div className="inline-block px-6 py-2 rounded-full" style={{ backgroundColor: getCategoryColor(category.key) }}>
+                    <span className="text-white font-bold text-sm">【{category.name}】{category.subtitle}</span>
                   </div>
                 </div>
-              );
-            })}
+
+                {/* カテゴリー内のタイプカード */}
+                <div className="grid grid-cols-2 gap-4">
+                  {category.types.map((type) => {
+                    const typeInfo = getTypeDescription(type);
+                    const categoryColor = getCategoryColor(category.key);
+
+                    return (
+                      <div
+                        key={type}
+                        className="bg-white rounded-xl overflow-hidden cursor-pointer"
+                        onClick={() => handleTypeClick(type)}
+                      >
+                        {/* 画像エリア */}
+                        <div className="relative aspect-square bg-gray-800 overflow-hidden">
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <div className="text-4xl opacity-20">🖼️</div>
+                          </div>
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img
+                            src={`/images/${type}.jpg`}
+                            alt={typeInfo.name}
+                            className="w-full h-full object-cover"
+                            onError={(e) => {
+                              const img = e.target as HTMLImageElement;
+                              if (img.src.endsWith('.jpg')) {
+                                img.src = `/images/${type}.png`;
+                              } else {
+                                img.style.display = 'none';
+                              }
+                            }}
+                            onLoad={(e) => {
+                              const parent = (e.target as HTMLImageElement).parentElement;
+                              if (parent) {
+                                const placeholder = parent.querySelector('.absolute');
+                                if (placeholder) (placeholder as HTMLElement).style.display = 'none';
+                              }
+                            }}
+                          />
+                        </div>
+
+                        {/* コンテンツエリア */}
+                        <div style={{ padding: '12px' }}>
+                          {/* タイプバッジ */}
+                          <div style={{ marginBottom: '8px' }}>
+                            <div className="inline-block px-3 py-1 rounded text-xs font-bold text-white" style={{ backgroundColor: categoryColor }}>
+                              {type}
+                            </div>
+                          </div>
+
+                          {/* タイプ名 */}
+                          <h3 className="text-sm font-bold text-gray-900" style={{ marginBottom: '6px' }}>
+                            {typeInfo.name}
+                          </h3>
+
+                          {/* 説明文 */}
+                          <p className="text-xs text-gray-600 leading-relaxed" style={{ marginBottom: '12px', minHeight: '2.5rem' }}>
+                            {typeInfo.tagline}
+                          </p>
+
+                          {/* 詳しく見るボタン */}
+                          <button
+                            className="w-full py-2 rounded text-xs font-bold text-white transition-all hover:opacity-90"
+                            style={{ backgroundColor: categoryColor }}
+                          >
+                            詳しく見る
+                          </button>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            ))}
           </div>
 
           {/* フッターセクション */}

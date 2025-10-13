@@ -15,11 +15,15 @@ function getTypeColor(type: DiagnosisType): string {
 
 function getCategoryColor(category: 'S' | 'N' | 'M'): string {
   const colors = {
-    'S': '#ef4444',
-    'N': '#a855f7',
-    'M': '#14b8a6',
+    'S': '#ef4444',  // 赤
+    'N': '#3b82f6',  // 青
+    'M': '#ec4899',  // ピンク
   };
   return colors[category];
+}
+
+function getTypeCategory(type: DiagnosisType): 'S' | 'N' | 'M' {
+  return type.split('-')[0] as 'S' | 'N' | 'M';
 }
 
 export default function TypesPage() {
@@ -76,6 +80,8 @@ export default function TypesPage() {
           <div className="space-y-4">
             {categories.flatMap((category) => category.types).map((type) => {
               const typeInfo = getTypeDescription(type);
+              const category = getTypeCategory(type);
+              const categoryColor = getCategoryColor(category);
 
               return (
                 <div
@@ -115,7 +121,7 @@ export default function TypesPage() {
                   <div style={{ padding: '16px' }}>
                     {/* タイプバッジ */}
                     <div style={{ marginBottom: '12px' }}>
-                      <div className="inline-block px-4 py-1 rounded text-sm font-bold text-white" style={{ backgroundColor: '#ef4444' }}>
+                      <div className="inline-block px-4 py-1 rounded text-sm font-bold text-white" style={{ backgroundColor: categoryColor }}>
                         {type}
                       </div>
                     </div>
@@ -133,7 +139,7 @@ export default function TypesPage() {
                     {/* 詳しく見るボタン */}
                     <button
                       className="w-full py-2 rounded text-sm font-bold text-white transition-all hover:opacity-90"
-                      style={{ backgroundColor: '#ef4444' }}
+                      style={{ backgroundColor: categoryColor }}
                     >
                       詳しく見る
                     </button>

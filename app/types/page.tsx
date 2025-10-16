@@ -166,11 +166,8 @@ export default function TypesPage() {
           <div className="w-full" style={{ marginTop: '48px' }}>
             <div className="flex items-center justify-between">
               <div className="flex flex-col gap-2">
-                <a href="/terms" className="text-white text-sm hover:text-gray-300 transition-colors">
+                <a href="/types" className="text-white text-sm hover:text-gray-300 transition-colors">
                   用語解説・全タイプ一覧
-                </a>
-                <a href="/privacy" className="text-white text-sm hover:text-gray-300 transition-colors">
-                  プライバシーポリシー
                 </a>
               </div>
               <button

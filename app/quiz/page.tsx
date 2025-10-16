@@ -102,7 +102,7 @@ export default function QuizPage() {
           </h2>
 
           {/* 選択肢 */}
-          <div className="mb-12 px-4 max-w-xl mx-auto space-y-4">
+          <div className="mb-12 px-4 max-w-xl mx-auto">
             {question.options.map((option, index) => {
               const isSelected = selectedOption === index;
               return (
@@ -117,7 +117,8 @@ export default function QuizPage() {
                     padding: '18px 24px',
                     border: isSelected ? '2px solid #f472b6' : '1px solid #4a4a4a',
                     transform: isSelected ? 'scale(1.03)' : 'scale(1)',
-                    boxShadow: isSelected ? '0 8px 24px rgba(236, 72, 153, 0.3)' : 'none'
+                    boxShadow: isSelected ? '0 8px 24px rgba(236, 72, 153, 0.3)' : 'none',
+                    margin: '12px 0'
                   }}
                 >
                   <div

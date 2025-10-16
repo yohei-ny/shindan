@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import { DiagnosisResult, DiagnosisType } from '@/types';
 import { getTypeDescription } from '@/lib/types';
+import { getCompatibilityData } from '@/lib/compatibility';
 
 function getTypeColor(type: DiagnosisType): string {
   const colors: Record<string, string> = {
@@ -84,6 +85,7 @@ export default function TypeResultPage() {
   const type = result.type;
   const typeInfo = getTypeDescription(type);
   const typeColor = getTypeColor(type);
+  const compatibility = getCompatibilityData(type);
 
   const handleShare = (platform: 'twitter' | 'line') => {
     const url = window.location.href;
@@ -184,18 +186,16 @@ export default function TypeResultPage() {
           <div className="w-full bg-gray-900 rounded-xl" style={{ padding: '24px', marginBottom: '32px' }}>
             <h2 className="text-lg font-bold text-white" style={{ marginBottom: '24px' }}>✅スコア詳細</h2>
             <div className="space-y-4">
-              {Object.entries(result.scores).map(([key, value]) => {
+              {Object.entries(result.scores)
+                .filter(([key]) => !['L', 'B'].includes(key))
+                .map(([key, value]) => {
                 const labels: Record<string, string> = {
-                  L: 'リビドー',
                   E: '新奇性',
-                  B: 'BDSM傾向',
                   ST: '刺激重視',
                   WA: '情緒重視',
                 };
                 const maxValues: Record<string, number> = {
-                  L: 16,
                   E: 9,
-                  B: 8,
                   ST: 5,
                   WA: 5,
                 };
@@ -218,6 +218,56 @@ export default function TypeResultPage() {
                   </div>
                 );
               })}
+            </div>
+          </div>
+
+          {/* 相性セクション */}
+          <div className="w-full" style={{ marginBottom: '32px' }}>
+            <h2 className="text-2xl font-bold text-white text-center" style={{ marginBottom: '24px' }}>💕 タイプ別相性</h2>
+
+            {/* 最良の相性 */}
+            <div className="bg-white rounded-xl" style={{ padding: '20px', marginBottom: '16px' }}>
+              <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2" style={{ marginBottom: '16px' }}>
+                ◎ 最良の相性
+              </h3>
+              <div className="space-y-3">
+                {compatibility.best.map((item, index) => (
+                  <div key={index} className="border-l-4 border-green-500 pl-3">
+                    <div className="font-bold text-gray-900 mb-1">{item.type}</div>
+                    <div className="text-sm text-gray-600">{item.description}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* 良い相性 */}
+            <div className="bg-white rounded-xl" style={{ padding: '20px', marginBottom: '16px' }}>
+              <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2" style={{ marginBottom: '16px' }}>
+                ○ 良い相性
+              </h3>
+              <div className="space-y-3">
+                {compatibility.good.map((item, index) => (
+                  <div key={index} className="border-l-4 border-blue-500 pl-3">
+                    <div className="font-bold text-gray-900 mb-1">{item.type}</div>
+                    <div className="text-sm text-gray-600">{item.description}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* 要工夫 */}
+            <div className="bg-white rounded-xl" style={{ padding: '20px' }}>
+              <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2" style={{ marginBottom: '16px' }}>
+                △ 要工夫
+              </h3>
+              <div className="space-y-3">
+                {compatibility.challenging.map((item, index) => (
+                  <div key={index} className="border-l-4 border-yellow-500 pl-3">
+                    <div className="font-bold text-gray-900 mb-1">{item.type}</div>
+                    <div className="text-sm text-gray-600">{item.description}</div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
 
@@ -256,11 +306,8 @@ export default function TypeResultPage() {
           {/* フッターリンク */}
           <div className="w-full flex items-center justify-between" style={{ marginBottom: '32px' }}>
             <div className="flex flex-col gap-2 text-white text-sm">
-              <a href="/terms" className="hover:text-gray-300 transition-colors">
+              <a href="/types" className="hover:text-gray-300 transition-colors">
                 用語解説・全タイプ一覧
-              </a>
-              <a href="/privacy" className="hover:text-gray-300 transition-colors">
-                プライバシーポリシー
               </a>
             </div>
             <button
